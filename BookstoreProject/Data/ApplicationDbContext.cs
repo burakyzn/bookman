@@ -13,5 +13,11 @@ namespace BookstoreProject.Data
             : base(options)
         {
         }
+
+        public DbSet<Kitap> Kitaplar { get; set; }
+
+        public DbSet<Kategori> Kategoriler { get; set; }
+
+        public DbSet<Dil> Diller { get; set; }
     }
 }

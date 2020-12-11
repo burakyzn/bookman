@@ -4,38 +4,22 @@ using BookstoreProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookstoreProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201211112117_temelTablolar2")]
+    partial class temelTablolar2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("BookstoreProject.Models.Dil", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Ad_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ad_TR")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Diller");
-                });
 
             modelBuilder.Entity("BookstoreProject.Models.Kategori", b =>
                 {
@@ -44,10 +28,7 @@ namespace BookstoreProject.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Ad_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ad_TR")
+                    b.Property<string>("Ad")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -71,9 +52,6 @@ namespace BookstoreProject.Data.Migrations
                     b.Property<int>("BasimYili")
                         .HasColumnType("int");
 
-                    b.Property<int>("DilId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Fiyat")
                         .HasColumnType("int");
 
@@ -90,8 +68,6 @@ namespace BookstoreProject.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DilId");
 
                     b.HasIndex("KategoriId");
 
@@ -302,12 +278,6 @@ namespace BookstoreProject.Data.Migrations
 
             modelBuilder.Entity("BookstoreProject.Models.Kitap", b =>
                 {
-                    b.HasOne("BookstoreProject.Models.Dil", "Dil")
-                        .WithMany()
-                        .HasForeignKey("DilId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BookstoreProject.Models.Kategori", "Kategori")
                         .WithMany()
                         .HasForeignKey("KategoriId")

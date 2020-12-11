@@ -14,5 +14,11 @@ namespace BookstoreProject.Controllers
         {
             return View();
         }
+
+        public IActionResult KitapEkle()
+        {
+            return View();
+        }
+
     }
 }

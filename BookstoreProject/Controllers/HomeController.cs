@@ -21,9 +21,10 @@ namespace BookstoreProject.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Kitap> _kitaplar = await _context.Kitaplar.OrderBy(x => x.Stok).Take(10).ToListAsync();
+            return View(_kitaplar);
         }
 
         [Authorize]
@@ -43,5 +44,11 @@ namespace BookstoreProject.Controllers
             Kitap _kitap = _context.Kitaplar.Where(x => x.Id == searchId).FirstOrDefault();
             return _kitap == null ? View("ErrorPage") : View(_kitap);
         } 
+
+        public async Task<IActionResult> SearchBooks(string searchItem)
+        {
+            List<Kitap> kitaplar = await _context.Kitaplar.Where(x => x.Ad_TR.ToLower().Contains(searchItem.ToLower())).ToListAsync();
+            return View(kitaplar);
+        }
     }
 }

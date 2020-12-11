@@ -30,7 +30,7 @@
         <div class="main-menu">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" class="nav-link"><img src="~/images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand nav-link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="logo"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -78,9 +78,9 @@
                             </span>
                             <span class="quntity">3</span>
                         </div>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Ara" aria-label="Search">
-                            <span class="fa fa-search"></span>
+                        <form id="searchForm" onsubmit="return checkSearchForm()" asp-controller="Home" asp-action="SearchBooks" class="form-inline my-2 my-lg-0" method="get" onSubmit="return checkform()">
+                            <input id="txtSearchItem" class="form-control mr-sm-2" name="searchItem" type="search" placeholder="Ara" aria-label="Search">
+                            <a class="fa fa-search" href="javascript:{}" onclick="checkSearchForm()"></a>
                         </form>
                     </div>
                 </nav>

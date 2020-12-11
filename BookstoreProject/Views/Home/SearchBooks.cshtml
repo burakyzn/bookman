@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Kitap>
+
+<section class="static about-sec">
+    <div class="container">
+        <h2>aramayla eşleşen kitaplar</h2>
+        <div class="recent-book-sec">
+            <div class="row">
+                @if (Model.Any())
+                {
+                    @foreach (var _kitap in Model)
+                    {
+                        <div class="col-md-3">
+                            <div class="item">
+                                <img src="https://i.hizliresim.com/TRzC3T.jpg" alt="img">
+                                <h3><a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@_kitap.Id">@_kitap.Ad_TR</a></h3>
+                                <h6><span class="price">@_kitap.Fiyat TL</span> / <a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@_kitap.Id">Satın Al</a></h6>
+                            </div>
+                        </div>
+                    }
+                } else
+                {
+                    <p style="margin-left:50px;">Aramayla eşleşen kitap bulunamadı.</p>
+                }
+            </div>
+            @*<h2>sizin için seçtiklerimiz</h2>
+            <div class="recomended-sec">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="item">
+                            <img src="images/img1.jpg" alt="img">
+                            <h3>how to be a bwase</h3>
+                            <h6><span class="price">$49</span> / <a href="#">Buy Now</a></h6>
+                            <div class="hover">
+                                <a href="product-single.html">
+                                    <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="item">
+                            <img src="images/img2.jpg" alt="img">
+                            <h3>How to write a book...</h3>
+                            <h6><span class="price">$19</span> / <a href="#">Buy Now</a></h6>
+                            <span class="sale">Sale !</span>
+                            <div class="hover">
+                                <a href="product-single.html">
+                                    <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="item">
+                            <img src="images/img3.jpg" alt="img">
+                            <h3>7-day self publish...</h3>
+                            <h6><span class="price">$49</span> / <a href="#">Buy Now</a></h6>
+                            <div class="hover">
+                                <a href="product-single.html">
+                                    <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="item">
+                            <img src="images/img4.jpg" alt="img">
+                            <h3>wendy doniger</h3>
+                            <h6><span class="price">$49</span> / <a href="#">Buy Now</a></h6>
+                            <div class="hover">
+                                <a href="product-single.html">
+                                    <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-sec">
+                <button class="btn gray-btn">Daha Fazla Kitap Yükle</button>
+            </div>*@
+        </div>
+    </div>
+</section>

@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BookstoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using BookstoreProject.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookstoreProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -35,5 +37,11 @@ namespace BookstoreProject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult BookDetails(int searchId)
+        {
+            Kitap _kitap = _context.Kitaplar.Where(x => x.Id == searchId).FirstOrDefault();
+            return _kitap == null ? View("ErrorPage") : View(_kitap);
+        } 
     }
 }

@@ -1,8 +1,8 @@
-﻿@model Kitap
+﻿@model Book
 
 <section class="product-sec">
     <div class="container">
-        <h1>@Model.Ad_TR</h1>
+        <h1>@Model.Name_TR</h1>
         <div class="row">
             <div class="col-md-6 slider-sec">
                 <!-- main slider carousel -->
@@ -41,17 +41,17 @@
                 <!--/main slider carousel-->
             </div>
             <div class="col-md-6 slider-content">
-                <p>@Model.Tanim_TR</p>
+                <p>@Model.Description_TR</p>
                 <ul>
                     <li>
                         <span class="name">Normal Fiyat</span><span class="clm">:</span>
-                        <span class="price">@(Model.Fiyat * 2) TL</span>
+                        <span class="price">@(Model.Price * 2) TL</span>
                     </li>
                     <li>
                         <span class="name">İndirimli Fiyat</span><span class="clm">:</span>
-                        <span class="price final">@Model.Fiyat TL</span>
+                        <span class="price final">@Model.Price TL</span>
                     </li>
-                    <li><span class="save-cost">Kazancınız : @Model.Fiyat TL (%50)</span></li>
+                    <li><span class="save-cost">Kazancınız : @Model.Price TL (%50)</span></li>
                 </ul>
                 <div class="btn-sec">
                     <button class="btn black">Sepete Ekle</button>

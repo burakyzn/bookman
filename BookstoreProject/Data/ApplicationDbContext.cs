@@ -14,10 +14,12 @@ namespace BookstoreProject.Data
         {
         }
 
-        public DbSet<Kitap> Kitaplar { get; set; }
+        public DbSet<Book> Books { get; set; }
 
-        public DbSet<Kategori> Kategoriler { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Dil> Diller { get; set; }
+        public DbSet<Language> Languages { get; set; }
+
+        public DbSet<Author> Authors { get; set; }
     }
 }

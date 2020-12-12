@@ -1,0 +1,102 @@
+﻿@model IEnumerable<BookstoreProject.Models.Book>
+
+@{
+    ViewData["Title"] = "Kitap Listesi";
+}
+
+<h1>Kitap Listesi</h1>
+
+<p>
+    <a asp-action="BookCreate">Yeni Kitap Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name_TR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name_EN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description_TR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description_EN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name_TR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name_EN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description_TR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description_EN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name_TR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Language.Name_TR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    <a asp-action="BookEdit" asp-route-id="@item.Id">Duzenle</a> |
+                    <a asp-action="BookDetails" asp-route-id="@item.Id">Detay</a> |
+                    <a asp-action="BookDelete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

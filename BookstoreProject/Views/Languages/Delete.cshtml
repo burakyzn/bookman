@@ -1,0 +1,33 @@
+﻿@model BookstoreProject.Models.Language
+
+@{
+    ViewData["Title"] = "Dil Sil";
+}
+
+<h1>Sil</h1>
+
+<h3>Silmek Istediginizden Emin Misiniz?</h3>
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name_TR)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name_TR)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name_EN)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name_EN)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a asp-action="Index">Listeye Geri Don</a>
+    </form>
+</div>

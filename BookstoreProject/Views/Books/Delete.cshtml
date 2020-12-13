@@ -1,12 +1,12 @@
 ﻿@model BookstoreProject.Models.Book
 
 @{
-    ViewData["Title"] = "Sil";
+    ViewData["Title"] = "Kitap Sil";
 }
 
 <h1>Sil</h1>
 
-<h3>Silmek istediginizden emin misiniz?</h3>
+<h3>Silmek Istediginizden Emin Misiniz?</h3>
 <div>
     
     <hr />
@@ -83,11 +83,29 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Active)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MainPhoto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MainPhoto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SecondPhoto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SecondPhoto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ThirdPhoto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ThirdPhoto)
+        </dd>
     </dl>
     
-    <form asp-action="BookDelete">
+    <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Sil" class="btn btn-danger" /> |
-        <a asp-action="BookList">Listeye Geri Don</a>
+        <a asp-action="Index">Listeye Geri Don</a>
     </form>
 </div>

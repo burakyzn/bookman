@@ -5,9 +5,21 @@
 }
 
 <h1>Admin Paneli</h1>
-<form asp-action="BookList">
+<form asp-controller="Books" asp-action="Index">
     
     <button  type="submit" class="btn btn-primary">Kitap Listesi</button>
 </form>
 
+<form asp-controller="Authors" asp-action="Index">
+
+    <button type="submit" class="btn btn-primary">Yazar Listesi</button>
+</form>
+<form asp-controller="Categories" asp-action="Index">
+
+    <button type="submit" class="btn btn-primary">Kategori Listesi</button>
+</form>
+<form asp-controller="Languages" asp-action="Index">
+
+    <button type="submit" class="btn btn-primary">Dil Listesi</button>
+</form>
 

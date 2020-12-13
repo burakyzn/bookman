@@ -1,18 +1,17 @@
 ﻿@model BookstoreProject.Models.Book
 
 @{
-    ViewData["Title"] = "Kitap Duzenle";
+    ViewData["Title"] = "Kitap Ekle";
 }
 
-<h1>Kitap Duzenle</h1>
+<h1>Ekle</h1>
 
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="BookEdit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name_TR" class="control-label"></label>
                 <input asp-for="Name_TR" class="form-control" />
@@ -50,33 +49,40 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="LanguageId" class="control-label"></label>
-                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.LanguageId"></select>
-                <span asp-validation-for="LanguageId" class="text-danger"></span>
+                <select asp-for="LanguageId" class ="form-control" asp-items="ViewBag.LanguageId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="AuthorId" class="control-label"></label>
-                <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
-                <span asp-validation-for="AuthorId" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
+                <select asp-for="AuthorId" class ="form-control" asp-items="ViewBag.AuthorId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="MainPhoto" class="control-label"></label>
+                <input asp-for="MainPhoto" class="form-control" />
+                <span asp-validation-for="MainPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondPhoto" class="control-label"></label>
+                <input asp-for="SecondPhoto" class="form-control" />
+                <span asp-validation-for="SecondPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThirdPhoto" class="control-label"></label>
+                <input asp-for="ThirdPhoto" class="form-control" />
+                <span asp-validation-for="ThirdPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ekle" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="BookList">Listeye Geri Don</a>
+    <a asp-action="Index">Listeye Geri Don</a>
 </div>
 
 @section Scripts {

@@ -24,15 +24,15 @@ namespace BookstoreProject.Models
         public int Stock { get; set; }
         [Display(Name = "Basim Yil")]
         public int PublishYear { get; set; }
-        
+        [Display(Name = "Kategori")]
         public int CategoryId { get; set; }
         [Display(Name = "Kategori")]
         public Category Category { get; set; }
-       
+        [Display(Name = "Dil")]
         public int LanguageId { get; set; }
         [Display(Name = "Dil")]
         public Language Language { get; set; }
-        
+        [Display(Name = "Yazar")]
         public int AuthorId { get; set; }
         [Display(Name = "Yazar")]
         public Author Author { get; set; }
@@ -40,5 +40,13 @@ namespace BookstoreProject.Models
         public DateTime CreateDate { get; set; }
         [Display(Name = "Aktiflik")]
         public bool Active { get; set; }
+
+        [Display(Name = "Ana Fotograf")]
+        public string MainPhoto { get; set; }
+        [Display(Name = "Ikinci Fotograf")]
+        public string SecondPhoto { get; set; }
+        [Display(Name = "Ucuncu Fotograf")]
+        public string ThirdPhoto { get; set; }
+
     }
 }

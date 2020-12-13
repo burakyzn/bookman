@@ -1,10 +1,10 @@
 ﻿@model BookstoreProject.Models.Book
 
 @{
-    ViewData["Title"] = "Kitap Detayi";
+    ViewData["Title"] = "Kitap Detaylari";
 }
 
-<h1>Kitap Detayi</h1>
+<h1>Detaylar</h1>
 
 <div>
     
@@ -82,9 +82,27 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Active)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MainPhoto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MainPhoto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SecondPhoto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SecondPhoto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ThirdPhoto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ThirdPhoto)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="BookEdit" asp-route-id="@Model.Id">Duzenle</a> |
-    <a asp-action="BookList">Listeye Geri Don</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Duzenle</a> |
+    <a asp-action="Index">Listeye Geri Don</a>
 </div>

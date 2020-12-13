@@ -43,6 +43,11 @@ namespace BookstoreProject
                 options.Password.RequireLowercase = true;
             });
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/ErrorPage");
+            });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -58,8 +63,8 @@ namespace BookstoreProject
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                app.UseStatusCodePagesWithReExecute("/Home/ErrorPage", "?statusCode={0}");
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();

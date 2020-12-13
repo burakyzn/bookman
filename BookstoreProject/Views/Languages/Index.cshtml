@@ -4,38 +4,50 @@
     ViewData["Title"] = "Dil Listesi";
 }
 
-<h1>Dil Listesi</h1>
+<section class="static about-sec">
+    <div class="container">
+        <h1>Dil Listesi</h1>
+        <form asp-controller="Languages" asp-action="Create" style=" margin-bottom: 10px;" method="get">
+            <button type="submit" class="btn btn-primary">Yeni Dil Ekle</button>
+        </form>
+        <table id="languagesTable" class="table table-striped table-bordered" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name_TR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name_EN)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name_TR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name_EN)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
 
-<p>
-    <a asp-action="Create">Yeni Dil Ekle</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name_TR)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name_EN)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name_TR)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name_EN)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Duzenle</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
-            </td>
-        </tr>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#languagesTable').DataTable();
+        });
+    </script>
 }
-    </tbody>
-</table>

@@ -42,13 +42,32 @@ namespace BookstoreProject.Controllers
         public IActionResult BookDetails(int searchId)
         {
             Book _kitap = _context.Books.Where(x => x.Id == searchId).FirstOrDefault();
-            return _kitap == null ? View("ErrorPage") : View(_kitap);
+
+            if(_kitap == null)
+                return RedirectToAction("ErrorPage", "Home", new { statusCode = 901});
+            else
+                return View(_kitap);
         } 
 
         public async Task<IActionResult> SearchBooks(string searchItem)
         {
             List<Book> kitaplar = await _context.Books.Where(x => x.Name_TR.ToLower().Contains(searchItem.ToLower())).ToListAsync();
             return View(kitaplar);
+        }
+
+        [Route("Home/ErrorPage/{statusCode}")]
+        public IActionResult ErrorPage(int statusCode)
+        {
+            switch (statusCode)
+            {
+                case 901:
+                    ViewBag.ErrorMessage = "Hata böyle bir kitap yok veya ulaşılamıyor.";
+                    break;
+                default:
+                    ViewBag.ErrorMessage = "Hata böyle bir sayfa yok veya ulaşılamıyor.";
+                    break;
+            }
+            return View();
         }
     }
 }

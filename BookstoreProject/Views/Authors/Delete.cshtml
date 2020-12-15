@@ -3,31 +3,36 @@
 @{
     ViewData["Title"] = "Yazar Sil";
 }
-
-<h1>Sil</h1>
-
-<h3>Silmek Istediginizden Emin Misiniz?</h3>
-<div>
-   
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Active)
-        </dd>
-    </dl>
+<div class="container">
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Sil" class="btn btn-danger" /> |
-        <a asp-action="Index">Listeye Geri Don</a>
-    </form>
+
+    <h3>Silmek Istediginizden Emin Misiniz?</h3>
+    <div>
+
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+        </dl>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Sil" class="btn btn-block btn-danger" /> 
+                    <a asp-action="Index">Listeye Geri Don</a>
+                </form>
+            </div>
+        </div>
+        
+    </div>
 </div>

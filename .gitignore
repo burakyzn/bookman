@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 
 #images files
-.BookstoreProject/wwwroot/images/*
+BookstoreProject/wwwroot/images/*

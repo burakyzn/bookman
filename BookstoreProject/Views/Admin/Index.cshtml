@@ -4,20 +4,37 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Admin Paneli</h1>
-<form asp-controller="Books" asp-action="Index">
-    <button  type="submit" class="btn btn-primary">Kitap Listesi</button>
-</form>
-
-<form asp-controller="Authors" asp-action="Index">
-    <button type="submit" class="btn btn-primary">Yazar Listesi</button>
-</form>
-<form asp-controller="Categories" asp-action="Index">
-
-    <button type="submit" class="btn btn-primary">Kategori Listesi</button>
-</form>
-<form asp-controller="Languages" asp-action="Index">
-
-    <button type="submit" class="btn btn-primary">Dil Listesi</button>
-</form>
-
+<div class="container">
+    <div class="row">
+        <div class=" col-md-6">
+            <form asp-controller="Books" asp-action="Index">
+                <div class="form-group">
+                    <input type="submit" value="Kitap Listesi" class="btn btn-block btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class=" col-md-6">
+            <form asp-controller="Authors" asp-action="Index">
+                <div class="form-group">
+                    <input type="submit" value="Yazar Listesi" class="btn btn-block btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-md-6">
+            <form asp-controller="Categories" asp-action="Index">
+                <div class="form-group">
+                    <input type="submit" value="Kategori Listesi" class="btn btn-block btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class=" col-md-6">
+            <form asp-controller="Languages" asp-action="Index">
+                <div class="form-group">
+                    <input type="submit" value="Dil Listesi" class="btn btn-block btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

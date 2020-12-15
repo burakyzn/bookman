@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -58,5 +61,16 @@ namespace BookstoreProject.Models
         [Display(Name = "Üçüncü Fotograf")]
         public string ThirdPhoto { get; set; }
 
+        [NotMapped]
+        [DisplayName("Ana Fotograf")]
+        public IFormFile MainPhotoFile { get; set; }
+
+        [NotMapped]
+        [DisplayName("İkinci Fotograf")]
+        public IFormFile SecondPhotoFile { get; set; }
+
+        [NotMapped]
+        [DisplayName("Üçüncü Fotograf")]
+        public IFormFile ThirdPhotoFile { get; set; }
     }
 }

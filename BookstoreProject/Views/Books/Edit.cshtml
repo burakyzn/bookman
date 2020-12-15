@@ -8,7 +8,7 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Edit">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
@@ -67,19 +67,19 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MainPhoto" class="control-label"></label>
-                    <input asp-for="MainPhoto" class="form-control" />
-                    <span asp-validation-for="MainPhoto" class="text-danger"></span>
+                    <label asp-for="MainPhotoFile" class="control-label"></label>
+                    <input asp-for="MainPhotoFile" class="form-control" />
+                    <span asp-validation-for="MainPhotoFile" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="SecondPhoto" class="control-label"></label>
-                    <input asp-for="SecondPhoto" class="form-control" />
-                    <span asp-validation-for="SecondPhoto" class="text-danger"></span>
+                    <label asp-for="SecondPhotoFile" class="control-label"></label>
+                    <input asp-for="SecondPhotoFile" class="form-control" />
+                    <span asp-validation-for="SecondPhotoFile" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ThirdPhoto" class="control-label"></label>
-                    <input asp-for="ThirdPhoto" class="form-control" />
-                    <span asp-validation-for="ThirdPhoto" class="text-danger"></span>
+                    <label asp-for="ThirdPhotoFile" class="control-label"></label>
+                    <input asp-for="ThirdPhotoFile" class="form-control" />
+                    <span asp-validation-for="ThirdPhotoFile" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Kaydet" class="btn btn-block btn-primary" />

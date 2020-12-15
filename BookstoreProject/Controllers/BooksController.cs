@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BookstoreProject.Data;
 using BookstoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BookstoreProject.Controllers
 {
@@ -15,20 +17,21 @@ namespace BookstoreProject.Controllers
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostEnviroment;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _hostEnviroment = hostEnvironment;
         }
 
-       
+
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Books.Include(b => b.Author).Include(b => b.Category).Include(b => b.Language);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,7 +52,6 @@ namespace BookstoreProject.Controllers
             return View(book);
         }
 
-        
         public IActionResult Create()
         {
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name");
@@ -58,13 +60,55 @@ namespace BookstoreProject.Controllers
             return View();
         }
 
-      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name_TR,Name_EN,Description_TR,Description_EN,Price,Stock,PublishYear,CategoryId,LanguageId,AuthorId,CreateDate,Active,MainPhoto,SecondPhoto,ThirdPhoto")] Book book)
+        public async Task<IActionResult> Create(Book book)
         {
             if (ModelState.IsValid)
             {
+                string[] imgext = new string[3];
+
+                imgext[0] = Path.GetExtension(book.MainPhotoFile.FileName);
+                imgext[1] = Path.GetExtension(book.SecondPhotoFile.FileName);
+                imgext[2] = Path.GetExtension(book.ThirdPhotoFile.FileName);
+
+                if ((imgext[0] == ".jpg" || imgext[0] == ".png") && (imgext[1] == ".jpg" || imgext[1] == ".png") && (imgext[2] == ".jpg" || imgext[2] == ".png"))
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        string path_name = Guid.NewGuid().ToString() + imgext[i];
+                        string saveimg = Path.Combine(_hostEnviroment.WebRootPath, "images", path_name);
+
+                        switch (i)
+                        {
+                            case 0:
+                                book.MainPhoto = path_name;
+                                using (var uploadimg = new FileStream(saveimg, FileMode.Create))
+                                {
+                                    await book.MainPhotoFile.CopyToAsync(uploadimg);
+                                }
+                                break;
+                            case 1:
+                                book.SecondPhoto = path_name;
+                                using (var uploadimg = new FileStream(saveimg, FileMode.Create))
+                                {
+                                    await book.SecondPhotoFile.CopyToAsync(uploadimg);
+                                }
+                                break;
+                            case 2:
+                                book.ThirdPhoto = path_name;
+                                using (var uploadimg = new FileStream(saveimg, FileMode.Create))
+                                {
+                                    await book.ThirdPhotoFile.CopyToAsync(uploadimg);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+
                 book.CreateDate = DateTime.Now;
                 book.Active = true;
                 _context.Add(book);
@@ -77,7 +121,6 @@ namespace BookstoreProject.Controllers
             return View(book);
         }
 
-        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,10 +139,9 @@ namespace BookstoreProject.Controllers
             return View(book);
         }
 
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN,Description_TR,Description_EN,Price,Stock,PublishYear,CategoryId,LanguageId,AuthorId,CreateDate,Active,MainPhoto,SecondPhoto,ThirdPhoto")] Book book)
+        public async Task<IActionResult> Edit(int id, Book book)
         {
             if (id != book.Id)
             {
@@ -108,6 +150,48 @@ namespace BookstoreProject.Controllers
 
             if (ModelState.IsValid)
             {
+                string[] imgext = new string[3];
+
+                imgext[0] = Path.GetExtension(book.MainPhotoFile.FileName);
+                imgext[1] = Path.GetExtension(book.SecondPhotoFile.FileName);
+                imgext[2] = Path.GetExtension(book.ThirdPhotoFile.FileName);
+
+                if ((imgext[0] == ".jpg" || imgext[0] == ".png") && (imgext[1] == ".jpg" || imgext[1] == ".png") && (imgext[2] == ".jpg" || imgext[2] == ".png"))
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        string path_name = Guid.NewGuid().ToString() + imgext[i];
+                        string saveimg = Path.Combine(_hostEnviroment.WebRootPath, "images", path_name);
+
+                        switch (i)
+                        {
+                            case 0:
+                                book.MainPhoto = path_name;
+                                using (var uploadimg = new FileStream(saveimg, FileMode.Create))
+                                {
+                                    await book.MainPhotoFile.CopyToAsync(uploadimg);
+                                }
+                                break;
+                            case 1:
+                                book.SecondPhoto = path_name;
+                                using (var uploadimg = new FileStream(saveimg, FileMode.Create))
+                                {
+                                    await book.SecondPhotoFile.CopyToAsync(uploadimg);
+                                }
+                                break;
+                            case 2:
+                                book.ThirdPhoto = path_name;
+                                using (var uploadimg = new FileStream(saveimg, FileMode.Create))
+                                {
+                                    await book.ThirdPhotoFile.CopyToAsync(uploadimg);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
                 try
                 {
                     _context.Update(book);
@@ -126,13 +210,13 @@ namespace BookstoreProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
             return View(book);
         }
 
-        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,7 +237,7 @@ namespace BookstoreProject.Controllers
             return View(book);
         }
 
-       
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

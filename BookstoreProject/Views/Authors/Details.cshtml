@@ -18,9 +18,18 @@
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Active)
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Active)
-            </dd>
+            @if (Model.Active == true)
+            {
+                <dt class="col-sm-10">
+                    <span class="circle green"></span>
+                </dt>
+            }
+            else
+            {
+                <dt class="col-sm-10">
+                    <span class="circle red"></span>
+                </dt>
+            }
         </dl>
     </div>
     <div>

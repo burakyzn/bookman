@@ -7,7 +7,7 @@
     <h1>Kitap Ekle</h1>
 
 
-    <form asp-action="Create">
+    <form asp-action="Create" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -65,19 +65,19 @@
                     <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MainPhoto" class="control-label"></label>
-                    <input asp-for="MainPhoto" class="form-control" />
-                    <span asp-validation-for="MainPhoto" class="text-danger"></span>
+                    <label asp-for="MainPhotoFile" class="control-label"></label>
+                    <input asp-for="MainPhotoFile" class="form-control" />
+                    <span asp-validation-for="MainPhotoFile" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="SecondPhoto" class="control-label"></label>
-                    <input asp-for="SecondPhoto" class="form-control" />
-                    <span asp-validation-for="SecondPhoto" class="text-danger"></span>
+                    <label asp-for="SecondPhotoFile" class="control-label"></label>
+                    <input asp-for="SecondPhotoFile" class="form-control" />
+                    <span asp-validation-for="SecondPhotoFile" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ThirdPhoto" class="control-label"></label>
-                    <input asp-for="ThirdPhoto" class="form-control" />
-                    <span asp-validation-for="ThirdPhoto" class="text-danger"></span>
+                    <label asp-for="ThirdPhotoFile" class="control-label"></label>
+                    <input asp-for="ThirdPhotoFile" class="form-control" />
+                    <span asp-validation-for="ThirdPhotoFile" class="text-danger"></span>
                 </div>
             </div>
         </div>

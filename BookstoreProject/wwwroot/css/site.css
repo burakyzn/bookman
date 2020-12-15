@@ -69,3 +69,19 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.circle {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.circle.red {
+    background-color: red;
+}
+
+.circle.green {
+    background-color: green;
+}

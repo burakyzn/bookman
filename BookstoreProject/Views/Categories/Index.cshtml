@@ -19,6 +19,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Name_EN)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,6 +35,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Name_EN)
                     </td>
+                    @if (item.Active == true)
+                    {
+                        <td><span class="circle green"></span></td>
+                    }
+                    else
+                    {
+                        <td><span class="circle red"></span></td>
+                    }
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
                         <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>

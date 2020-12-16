@@ -54,10 +54,11 @@ namespace BookstoreProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name_TR,Name_EN")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name_TR,Name_EN,Active")] Category category)
         {
             if (ModelState.IsValid)
             {
+                category.Active = true;
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -84,7 +85,7 @@ namespace BookstoreProject.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN,Active")] Category category)
         {
             if (id != category.Id)
             {
@@ -137,9 +138,19 @@ namespace BookstoreProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            Category category = _context.Categories.Where(x => x.Id == id).FirstOrDefault();
+
+            if (category != null)
+            {
+                category.Active = false;
+                _context.Update(category);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return NotFound();
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -19,25 +19,36 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Name_EN)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name_TR)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name_EN)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
-                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name_TR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name_EN)
+                    </td>
+                    @if (item.Active == true)
+                    {
+                        <td><span class="circle green"></span></td>
+                    }
+                    else
+                    {
+                        <td><span class="circle red"></span></td>
+                    }
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

@@ -21,6 +21,11 @@
                     <input asp-for="Name_EN" class="form-control" />
                     <span asp-validation-for="Name_EN" class="text-danger"></span>
                 </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Kaydet" class="btn btn-block btn-primary" />
                 </div>
@@ -28,9 +33,15 @@
         </div>
     </div>
 
-    <div>
-        <a asp-action="Index">Listeye Geri Don</a>
-    </div>
+    <form asp-action="Index">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

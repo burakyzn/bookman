@@ -111,8 +111,20 @@
             </dd>
         </dl>
     </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Duzenle</a> |
-        <a asp-action="Index">Listeye Geri Don</a>
+    <div class="row">
+        <div class="col-md-3">
+            <form asp-action="Edit">
+                <div class="form-group">
+                    <input type="submit" value="Düzenle" class="btn btn-block btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <form asp-action="Index">
+                <div class="form-group">
+                    <input type="submit" value="Listeye Geri Dön" class="btn btn-block btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>

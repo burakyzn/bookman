@@ -54,10 +54,11 @@ namespace BookstoreProject.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name_TR,Name_EN")] Language language)
+        public async Task<IActionResult> Create([Bind("Id,Name_TR,Name_EN,Active")] Language language)
         {
             if (ModelState.IsValid)
             {
+                language.Active = true;
                 _context.Add(language);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -84,7 +85,7 @@ namespace BookstoreProject.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN")] Language language)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN,Active")] Language language)
         {
             if (id != language.Id)
             {
@@ -137,9 +138,19 @@ namespace BookstoreProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var language = await _context.Languages.FindAsync(id);
-            _context.Languages.Remove(language);
-            await _context.SaveChangesAsync();
+            Language language = _context.Languages.Where(x => x.Id == id).FirstOrDefault();
+
+            if (language != null)
+            {
+                language.Active = false;
+                _context.Update(language);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return NotFound();
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

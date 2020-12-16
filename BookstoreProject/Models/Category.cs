@@ -15,5 +15,8 @@ namespace BookstoreProject.Models
 
         [Display(Name = "İngilizce İsim")]
         public string Name_EN { get; set; }
+
+        [Display(Name = "Aktiflik")]
+        public bool Active { get; set; }
     }
 }

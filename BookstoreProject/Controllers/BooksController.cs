@@ -242,10 +242,23 @@ namespace BookstoreProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var book = await _context.Books.FindAsync(id);
-            _context.Books.Remove(book);
-            await _context.SaveChangesAsync();
+            Book book = _context.Books.Where(x => x.Id == id).FirstOrDefault();
+
+            if (book != null)
+            {
+                book.Active = false;
+                _context.Update(book);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return NotFound();
+            }
+
             return RedirectToAction(nameof(Index));
+
+
+
         }
 
         private bool BookExists(int id)

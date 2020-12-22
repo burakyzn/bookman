@@ -21,5 +21,7 @@ namespace BookstoreProject.Data
         public DbSet<Language> Languages { get; set; }
 
         public DbSet<Author> Authors { get; set; }
+
+        public DbSet<Basket> Baskets { get; set; }
     }
 }

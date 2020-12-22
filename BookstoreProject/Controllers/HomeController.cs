@@ -9,6 +9,7 @@ using BookstoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using BookstoreProject.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BookstoreProject.Controllers
 {
@@ -68,6 +69,23 @@ namespace BookstoreProject.Controllers
                     break;
             }
             return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddBookToBasket(int bookId)
+        {
+            Basket _basket = new Basket
+            {
+                BookId = bookId,
+                Active = true,
+                UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
+            };
+
+            _context.Add(_basket);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Baskets");
         }
     }
 }

@@ -43,20 +43,20 @@
                             <li class="navbar-item">
                                 <a href="about.html" class="nav-link">Hakkımızda</a>
                             </li>
-                            <li class="navbar-item">
-                                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-link">Özel</a>
-                            </li>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <li class="navbar-item">
-                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">@User.Identity.Name!</a>
-                                </li>
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li class="navbar-item">
                                         <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Panel</a>
                                     </li>
                                 }
+                                <li class="navbar-item">
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">@User.Identity.Name!</a>
+                                </li>
+                                <li class="navbar-item">
+                                    <a asp-area="" asp-controller="Baskets" asp-action="Index" class="nav-link">Sepetim</a>
+                                </li>
                                 <li class="navbar-item">
                                     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                         <button type="submit" class="nav-link btn btn-link text-dark">Çıkış Yap</button>
@@ -73,12 +73,12 @@
                                 </li>
                             }
                         </ul>
-                        <div class="cart my-2 my-lg-0">
+                        @*<div class="cart my-2 my-lg-0">
                             <span>
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </span>
                             <span class="quntity">3</span>
-                        </div>
+                        </div>*@
                         <form id="searchForm" onsubmit="return checkSearchForm()" asp-controller="Home" asp-action="SearchBooks" class="form-inline my-2 my-lg-0" method="get" onSubmit="return checkform()">
                             <input id="txtSearchItem" class="form-control mr-sm-2" name="searchItem" type="search" placeholder="Ara" aria-label="Search">
                             <a class="fa fa-search" href="javascript:{}" onclick="checkSearchForm()"></a>

@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Sepetim";
+}
+
+@model IEnumerable<Basket>
+
+<section class="static about-sec">
+    <div class="container">
+        <h2>Sepetim</h2>
+        <div class="recent-book-sec">
+            <div class="row">
+                @if (Model.Any())
+                {
+                    @foreach (var _basket in Model)
+                    {
+                        <div class="col-md-3">
+                            <div class="item">
+                                <img src="~/images/@_basket.Book.MainPhoto" class="img" />
+                                <h3><a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@_basket.Id">@_basket.Book.Name_TR</a></h3>
+                                <h6><span class="price">@_basket.Book.Price TL</span> / <a asp-controller="Baskets" asp-action="removeFromBasket" asp-route-bookId="@_basket.Book.Id">Sepetimden Çıkar</a></h6>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p style="margin-left:50px;">Sepetin boş görünüyor. Hemen yeni kitaplara göz at.</p>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="btn-sec">
+                <span>Toplam Fiyat : <span>@ViewData["ToplamFiyat"]</span></span>
+                <button style="margin-left : 20px;"class="btn black">Satın Al</button>
+            </div>
+        </div>
+    </div>
+</section>

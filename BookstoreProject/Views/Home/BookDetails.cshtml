@@ -53,9 +53,11 @@
                     </li>
                     <li><span class="save-cost">Kazancınız : @Model.Price TL (%50)</span></li>
                 </ul>
-                <div class="btn-sec">
-                    <button class="btn black">Sepete Ekle</button>
-                </div>
+                <form asp-controller="Home" asp-action="AddBookToBasket" method="post">
+                    <div class="btn-sec">
+                        <button name="bookId" value="@Model.Id" class="btn black">Sepete Ekle</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

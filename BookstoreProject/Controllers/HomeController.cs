@@ -40,16 +40,23 @@ namespace BookstoreProject.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult BookDetails(int searchId)
+        public async Task<IActionResult>BookDetails(int searchId)
         {
+            
+            
+            List<Book> kitaplar = await _context.Books.OrderBy(u => Guid.NewGuid()).Where(u=>u.Id!=searchId).Take(4).ToListAsync();
+            
             Book _kitap = _context.Books.Where(x => x.Id == searchId).FirstOrDefault();
-
-            if(_kitap == null)
-                return RedirectToAction("ErrorPage", "Home", new { statusCode = 901});
-            else
-                return View(_kitap);
-        } 
-
+            kitaplar.Add(_kitap);
+            if (_kitap == null)
+                return RedirectToAction("ErrorPage", "Home", new { statusCode = 901 });
+            else 
+                return View(kitaplar);
+           
+               
+           
+        }
+      
         public async Task<IActionResult> SearchBooks(string searchItem)
         {
             List<Book> kitaplar = await _context.Books.Where(x => x.Name_TR.ToLower().Contains(searchItem.ToLower())).ToListAsync();

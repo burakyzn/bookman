@@ -6,9 +6,10 @@
 <div class="container">
     <h1>Duzenle</h1>
     <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit" enctype="multipart/form-data">
+
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
@@ -46,6 +47,8 @@
                     <input asp-for="PublishYear" class="form-control" />
                     <span asp-validation-for="PublishYear" class="text-danger"></span>
                 </div>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="CategoryId" class="control-label"></label>
                     <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
@@ -60,11 +63,6 @@
                     <label asp-for="AuthorId" class="control-label"></label>
                     <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
                     <span asp-validation-for="AuthorId" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                    </label>
                 </div>
                 <div class="form-group">
                     <label asp-for="MainPhotoFile" class="control-label"></label>
@@ -81,16 +79,21 @@
                     <input asp-for="ThirdPhotoFile" class="form-control" />
                     <span asp-validation-for="ThirdPhotoFile" class="text-danger"></span>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-8">
                 <div class="form-group">
                     <input type="submit" value="Kaydet" class="btn btn-block btn-primary" />
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
+
 
     <form asp-action="Index">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="form-group">
                     <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
                 </div>

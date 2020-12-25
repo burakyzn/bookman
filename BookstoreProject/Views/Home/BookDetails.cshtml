@@ -77,9 +77,9 @@
                     @if (count != Model.Count()-1)
                     {
 
-                        <div class="col-lg-3 col-md-6" >
+                        <div class="col-lg-3 col-md-6"  >
                             <div class="item">
-                                <img src="~/images/@book.MainPhoto" class="img-responsive">
+                                <img src="~/images/@book.MainPhoto" style="height:150px;" class="img-responsive">
                                 <h3>@book.Name_TR</h3>
                                 <h6><span class="price">@book.Price TL</span> /<a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@book.Id">İncele</a></h6>
                                 <div class="hover">

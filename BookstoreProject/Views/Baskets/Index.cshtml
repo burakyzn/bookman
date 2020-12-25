@@ -2,37 +2,64 @@
     ViewData["Title"] = "Sepetim";
 }
 
-@model IEnumerable<Basket>
+@model IEnumerable<BookstoreProject.Models.BasketItem>
 
 <section class="static about-sec">
     <div class="container">
-        <h2>Sepetim</h2>
-        <div class="recent-book-sec">
+        @if (TempData["SiparisMesaj"] != null)
+        {
             <div class="row">
+                <h1>@TempData["SiparisMesaj"]</h1>
+            </div>
+            <div class="row">
+                <form asp-controller="Home" asp-action="Index">
+                    <div class="form-group">
+                        <input type="submit" value="Anasayfaya Dön" class="btn btn-block btn-primary" />
+                    </div>
+                </form>
+            </div>
+        }
+        else
+        {
+            <h2>Sepetim</h2>
+            <div class="recent-book-sec">
+                <div class="row">
+                    @if (Model != null)
+                    {
+                        @if (Model.Any())
+                        {
+                            @foreach (var _basket in Model)
+                            {
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <img src="~/images/@_basket.Book.MainPhoto" class="img" />
+                                        <h3><a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@_basket.Id">@_basket.Book.Name_TR</a></h3>
+                                        <h6><span class="price">@_basket.Book.Price TL</span> / <a asp-controller="Baskets" asp-action="removeFromBasket" asp-route-bookId="@_basket.Book.Id">Sepetimden Çıkar</a></h6>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p style="margin-left:50px;">Sepetin boş görünüyor. Hemen yeni kitaplara göz at.</p>
+                    }
+                </div>
+            </div>
+            @if (Model != null)
+            {
                 @if (Model.Any())
                 {
-                    @foreach (var _basket in Model)
-                    {
-                        <div class="col-md-3">
-                            <div class="item">
-                                <img src="~/images/@_basket.Book.MainPhoto" class="img" />
-                                <h3><a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@_basket.Id">@_basket.Book.Name_TR</a></h3>
-                                <h6><span class="price">@_basket.Book.Price TL</span> / <a asp-controller="Baskets" asp-action="removeFromBasket" asp-route-bookId="@_basket.Book.Id">Sepetimden Çıkar</a></h6>
+                    <div class="row">
+                        <form asp-controller="Baskets" asp-action="BuyBooks" method="post">
+                            <div class="btn-sec">
+                                <span>Toplam Fiyat : <span>@ViewData["ToplamFiyat"]</span></span>
+                                <button name="basketId" value="@ViewData["BasketID"]" style="margin-left : 20px;" class="btn black">Satın Al</button>
                             </div>
-                        </div>
-                    }
+                        </form>
+                    </div>
                 }
-                else
-                {
-                    <p style="margin-left:50px;">Sepetin boş görünüyor. Hemen yeni kitaplara göz at.</p>
-                }
-            </div>
-        </div>
-        <div class="row">
-            <div class="btn-sec">
-                <span>Toplam Fiyat : <span>@ViewData["ToplamFiyat"]</span></span>
-                <button style="margin-left : 20px;"class="btn black">Satın Al</button>
-            </div>
-        </div>
+            }
+        }
     </div>
 </section>

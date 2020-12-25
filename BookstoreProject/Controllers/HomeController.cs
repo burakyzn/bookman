@@ -82,15 +82,44 @@ namespace BookstoreProject.Controllers
         [Authorize]
         public async Task<IActionResult> AddBookToBasket(int bookId)
         {
-            Basket _basket = new Basket
-            {
-                BookId = bookId,
-                Active = true,
-                UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
-            };
+            var basket = await _context.Baskets
+                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
+                .FirstOrDefaultAsync();
 
-            _context.Add(_basket);
-            await _context.SaveChangesAsync();
+            if(basket != null)
+            {
+                BasketItem newBasketItem = new BasketItem
+                {
+                    BasketId = basket.Id,
+                    BookId = bookId,
+                    Active = true
+                };
+
+                _context.Add(newBasketItem);
+                await _context.SaveChangesAsync();
+            } else
+            {
+           
+                Basket newBasket = new Basket
+                {
+                    Durum = "YENI",
+                    Active = true,
+                    UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                };
+
+                _context.Add(newBasket);
+                _context.SaveChanges();
+
+                BasketItem newBasketItem = new BasketItem
+                {
+                    BasketId = newBasket.Id,
+                    BookId = bookId,
+                    Active = true
+                };
+
+                _context.Add(newBasketItem);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToAction("Index", "Baskets");
         }

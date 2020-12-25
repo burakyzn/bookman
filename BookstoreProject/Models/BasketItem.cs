@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace BookstoreProject.Models
 {
-    public class Basket
+    public class BasketItem
     {
         public int Id { get; set; }
-        public Guid UserId { get; set; }
-        public string Durum { get; set; }
+        public int BasketId { get; set; }
+        public Basket Basket { get; set; }
+        public int BookId { get; set; }
+        public Book Book { get; set; }
         public bool Active { get; set; }
     }
 }

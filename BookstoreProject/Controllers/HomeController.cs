@@ -40,10 +40,8 @@ namespace BookstoreProject.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<IActionResult>BookDetails(int searchId)
+        public async Task<IActionResult> BookDetails(int searchId)
         {
-            
-            
             List<Book> kitaplar = await _context.Books.OrderBy(u => Guid.NewGuid()).Where(u=>u.Id!=searchId).Take(4).ToListAsync();
             
             Book _kitap = _context.Books.Where(x => x.Id == searchId).FirstOrDefault();
@@ -52,9 +50,6 @@ namespace BookstoreProject.Controllers
                 return RedirectToAction("ErrorPage", "Home", new { statusCode = 901 });
             else 
                 return View(kitaplar);
-           
-               
-           
         }
       
         public async Task<IActionResult> SearchBooks(string searchItem)
@@ -122,6 +117,64 @@ namespace BookstoreProject.Controllers
             }
 
             return RedirectToAction("Index", "Baskets");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyOrder()
+        {
+            List<Basket> baskets = await _context.Baskets
+                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == false)
+                .ToListAsync();
+
+            return View(baskets);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> CancelOrder(int? orderId)
+        {
+            if(orderId == null)
+            {
+                return NotFound();
+            }
+
+            Basket basket = await _context.Baskets
+                .Where(x => x.Id == orderId)
+                .FirstOrDefaultAsync();
+
+            if(basket == null)
+            {
+                TempData["HataMesaj"] = "Böyle bir sipariş bulunamadı.";
+            } else
+            {
+                basket.Durum = "IPTAL";
+                basket.Active = false;
+                _context.Update(basket);
+                await _context.SaveChangesAsync();
+            }
+
+            List<Basket> basketList = await _context.Baskets
+                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == false)
+                .ToListAsync();
+
+            return View("MyOrder", basketList);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> OrderDetails(int? orderId)
+        {
+            if(orderId == null)
+            {
+                return NotFound();
+            }
+
+            List<BasketItem> basketItems = await _context.BasketItems
+                .Where(b => b.BasketId == orderId)
+                .Include(b => b.Book)
+                .Include(b => b.Book.Category)
+                .Include(b => b.Book.Author)
+                .ToListAsync();
+
+            return View(basketItems);
         }
     }
 }

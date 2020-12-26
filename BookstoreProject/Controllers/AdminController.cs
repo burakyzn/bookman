@@ -14,7 +14,6 @@ namespace BookstoreProject.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-
         private readonly ApplicationDbContext _context;
 
         public AdminController(ApplicationDbContext context)
@@ -22,7 +21,6 @@ namespace BookstoreProject.Controllers
             _context = context;
         }
 
-        
         public IActionResult Index()
         {
             
@@ -30,16 +28,29 @@ namespace BookstoreProject.Controllers
         }
         public async Task<IActionResult> OrderList()
         {
-            List<UserDetails> users = _context.Users.ToList();
-            var applicationDbContext = _context.Baskets.Where(b => b.Active == false&& b.Durum=="KARGO");
-            
-            return View(await applicationDbContext.ToListAsync());
+            List<Basket> basket = await _context.Baskets
+                .Where(b => b.Active == false && b.Durum == "KARGO")
+                .ToListAsync();
+
+            // .Include(b => b.UserDetails)
+            return View(basket);
             
         }
         public async Task<IActionResult> BasketDetails(int? id)
         {
-            var applicationDbContext = _context.BasketItems.Where(b => b.BasketId==id).Include(b=>b.Book);
-            return View(await applicationDbContext.ToListAsync());
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            List<BasketItem> basketItems = await _context.BasketItems
+                .Where(b => b.BasketId == id)
+                .Include(b => b.Book)
+                .Include(b => b.Book.Category)
+                .Include(b => b.Book.Author)
+                .ToListAsync();
+
+            return View(basketItems);
         }
 
 
@@ -52,8 +63,6 @@ namespace BookstoreProject.Controllers
                 basket.Durum = "TAMAMLANDI";
                 _context.Update(basket);
                 await _context.SaveChangesAsync();
-               
-               
             }
             else
             {
@@ -62,7 +71,5 @@ namespace BookstoreProject.Controllers
 
             return RedirectToAction(nameof(OrderList));
         }
-
-
     }
 }

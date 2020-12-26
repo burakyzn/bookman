@@ -40,9 +40,6 @@
                             <li class="navbar-item">
                                 <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Anasayfa</a>
                             </li>
-                            <li class="navbar-item">
-                                <a href="about.html" class="nav-link">Hakkımızda</a>
-                            </li>
                             @if (SignInManager.IsSignedIn(User))
                             {
                                 @if (User.IsInRole("Admin"))
@@ -53,6 +50,9 @@
                                 }
                                 <li class="navbar-item">
                                     <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">@User.Identity.Name!</a>
+                                </li>
+                                <li class="navbar-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="MyOrder" class="nav-link">Siparişlerim</a>
                                 </li>
                                 <li class="navbar-item">
                                     <a asp-area="" asp-controller="Baskets" asp-action="Index" class="nav-link">Sepetim</a>

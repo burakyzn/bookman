@@ -133,9 +133,11 @@ namespace BookstoreProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
-            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
+            
+            //List<SelectList> degerler = _context.Authors.Where(a => a.Active == true).ToList();
+            ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a=>a.Active==true), "Id", "Name", book.AuthorId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name_TR", book.CategoryId);
+            ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name_TR", book.LanguageId);
             return View(book);
         }
 
@@ -246,9 +248,19 @@ namespace BookstoreProject.Controllers
 
             if (book != null)
             {
-                book.Active = false;
-                _context.Update(book);
-                await _context.SaveChangesAsync();
+                if(book.Active==true)
+                {
+                    book.Active = false;
+                    _context.Update(book);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    book.Active = true;
+                    _context.Update(book);
+                    await _context.SaveChangesAsync();
+                }
+                
             }
             else
             {

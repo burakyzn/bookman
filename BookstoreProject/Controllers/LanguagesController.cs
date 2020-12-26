@@ -142,9 +142,19 @@ namespace BookstoreProject.Controllers
 
             if (language != null)
             {
-                language.Active = false;
-                _context.Update(language);
-                await _context.SaveChangesAsync();
+                if(language.Active==true)
+                {
+                    language.Active = false;
+                    _context.Update(language);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    language.Active = true;
+                    _context.Update(language);
+                    await _context.SaveChangesAsync();
+                }
+                
             }
             else
             {

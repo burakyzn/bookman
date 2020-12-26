@@ -4,49 +4,96 @@
     ViewData["Title"] = "Dil Sil";
 }
 <div class="container">
-    
-    <h3>Silmek Istediginizden Emin Misiniz?</h3>
-    <div>
+    @if (Model.Active == true)
+    {
+        <h3>Pasif Etmek Istediginizden Emin Misiniz?</h3>
+        <div>
 
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Name_TR)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Name_TR)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Name_EN)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Name_EN)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Active)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Active)
-            </dd>
-        </dl>
-        <div class="row">
-            <div class="col-md-3">
-                <form asp-action="Delete">
-                    <input type="hidden" asp-for="Id" />
-                    <input type="submit" value="SİL" class="btn btn-block btn-danger" />
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name_TR)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name_TR)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name_EN)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name_EN)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Active)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Active)
+                </dd>
+            </dl>
+            <div class="row">
+                <div class="col-md-3">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Pasif Et" class="btn btn-block btn-danger" />
 
-                </form>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form asp-action="Index">
+                        <div class="form-group">
+                            <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="col-md-3">
-                <form asp-action="Index">
-                    <div class="form-group">
-                        <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
-                    </div>
-                </form>
-            </div>  
         </div>
-     </div>
-           
+    }
+    else
+    {
+        <h3>Aktif Etmek Istediginizden Emin Misiniz?</h3>
+        <div>
 
-        
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name_TR)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name_TR)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name_EN)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name_EN)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Active)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Active)
+                </dd>
+            </dl>
+            <div class="row">
+                <div class="col-md-3">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Aktif Et" class="btn btn-block btn-danger" />
+
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form asp-action="Index">
+                        <div class="form-group">
+                            <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
 </div>

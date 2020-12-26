@@ -142,9 +142,20 @@ namespace BookstoreProject.Controllers
 
             if(author != null)
             {
-                author.Active = false;
-                _context.Update(author);
-                await _context.SaveChangesAsync();
+                if(author.Active==false)
+                {
+                    author.Active = true;
+                    _context.Update(author);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    author.Active = false;
+                    _context.Update(author);
+                    await _context.SaveChangesAsync();
+                }
+               
+               
             } else
             {
                 return NotFound();

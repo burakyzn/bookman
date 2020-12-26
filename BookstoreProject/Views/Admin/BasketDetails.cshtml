@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BookstoreProject.Models.BasketItem>
+
+@{
+    ViewData["Title"] = "Sepet Deneme Listesi";
+}
+
+<section class="static about-sec">
+    <div class="container-fluid">
+        <h1>Sepet Detayı</h1>
+
+        <table id="bookTable" class="table table-striped table-bordered" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Book.Name_TR)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#bookTable').DataTable();
+        });
+    </script>
+}

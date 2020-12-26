@@ -142,9 +142,19 @@ namespace BookstoreProject.Controllers
 
             if (category != null)
             {
-                category.Active = false;
-                _context.Update(category);
-                await _context.SaveChangesAsync();
+                if(category.Active==true)
+                {
+                    category.Active = false;
+                    _context.Update(category);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    category.Active = true;
+                    _context.Update(category);
+                    await _context.SaveChangesAsync();
+                }
+                
             }
             else
             {

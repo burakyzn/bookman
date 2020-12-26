@@ -10,16 +10,19 @@ using Microsoft.AspNetCore.Authorization;
 using BookstoreProject.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookstoreProject.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<UserDetails> _userManager;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context, UserManager<UserDetails> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -78,15 +81,21 @@ namespace BookstoreProject.Controllers
         public async Task<IActionResult> AddBookToBasket(int bookId)
         {
             var basket = await _context.Baskets
-                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
+                .Where(x => x.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
                 .FirstOrDefaultAsync();
+
+            Book currentBook = await _context.Books
+                .Where(x => x.Id == bookId && x.Active == true)
+                .FirstOrDefaultAsync();
+
+            if (currentBook == null) return NotFound();
 
             if(basket != null)
             {
                 BasketItem newBasketItem = new BasketItem
                 {
                     BasketId = basket.Id,
-                    BookId = bookId,
+                    Book = currentBook,
                     Active = true
                 };
 
@@ -97,9 +106,9 @@ namespace BookstoreProject.Controllers
            
                 Basket newBasket = new Basket
                 {
-                    Durum = "YENI",
+                    Status = "YENI",
                     Active = true,
-                    UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    UserDetails = await _userManager.GetUserAsync(User)
                 };
 
                 _context.Add(newBasket);
@@ -108,7 +117,7 @@ namespace BookstoreProject.Controllers
                 BasketItem newBasketItem = new BasketItem
                 {
                     BasketId = newBasket.Id,
-                    BookId = bookId,
+                    Book = currentBook,
                     Active = true
                 };
 
@@ -123,7 +132,7 @@ namespace BookstoreProject.Controllers
         public async Task<IActionResult> MyOrder()
         {
             List<Basket> baskets = await _context.Baskets
-                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == false)
+                .Where(x => x.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == false)
                 .ToListAsync();
 
             return View(baskets);
@@ -146,14 +155,14 @@ namespace BookstoreProject.Controllers
                 TempData["HataMesaj"] = "Böyle bir sipariş bulunamadı.";
             } else
             {
-                basket.Durum = "IPTAL";
+                basket.Status = "IPTAL";
                 basket.Active = false;
                 _context.Update(basket);
                 await _context.SaveChangesAsync();
             }
 
             List<Basket> basketList = await _context.Baskets
-                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == false)
+                .Where(x => x.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == false)
                 .ToListAsync();
 
             return View("MyOrder", basketList);
@@ -168,7 +177,7 @@ namespace BookstoreProject.Controllers
             }
 
             List<BasketItem> basketItems = await _context.BasketItems
-                .Where(b => b.BasketId == orderId)
+                .Where(b => b.BasketId == orderId && b.Active == true)
                 .Include(b => b.Book)
                 .Include(b => b.Book.Category)
                 .Include(b => b.Book.Author)

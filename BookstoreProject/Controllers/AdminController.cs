@@ -29,12 +29,11 @@ namespace BookstoreProject.Controllers
         public async Task<IActionResult> OrderList()
         {
             List<Basket> basket = await _context.Baskets
-                .Where(b => b.Active == false && b.Durum == "KARGO")
+                .Where(b => b.Active == false && b.Status == "KARGO")
+                .Include(b => b.UserDetails)
                 .ToListAsync();
 
-            // .Include(b => b.UserDetails)
             return View(basket);
-            
         }
         public async Task<IActionResult> BasketDetails(int? id)
         {
@@ -60,7 +59,7 @@ namespace BookstoreProject.Controllers
 
             if (basket != null)
             {
-                basket.Durum = "TAMAMLANDI";
+                basket.Status = "TAMAMLANDI";
                 _context.Update(basket);
                 await _context.SaveChangesAsync();
             }

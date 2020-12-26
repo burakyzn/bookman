@@ -7,7 +7,7 @@
 <section class="static about-sec">
     <div class="container">
         <h1>Siparişlerim</h1>
-        @if(TempData["HataMesaj"] != null)
+        @if (TempData["HataMesaj"] != null)
         {
             <h3>@TempData["HataMesaj"]</h3>
         }
@@ -20,7 +20,7 @@
                             @Html.DisplayNameFor(model => model.Id)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Durum)
+                            @Html.DisplayNameFor(model => model.Status)
                         </th>
                         <th>İşlemler</th>
                     </tr>
@@ -33,32 +33,21 @@
                                 @Html.DisplayFor(modelItem => item.Id)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Durum)
+                                @Html.DisplayFor(modelItem => item.Status)
                             </td>
-                            @if (item.Durum == "KARGO")
+                            @if (item.Status == "KARGO")
                             {
                                 <td style="display: flex;">
-                                    <form class="col-6" style="display:inline-block;" asp-controller="Home" asp-action="OrderDetails">
-                                        <div class="btn-sec">
-                                            <button name="orderId" value="@item.Id" class="btn btn-block btn-primary">Detay</button>
-                                        </div>
-                                    </form>
-                                    <form class="col-6" style="display:inline-block;" asp-controller="Home" asp-action="CancelOrder">
-                                        <div class="btn-sec">
-                                            <button name="orderId" value="@item.Id" class="btn btn-block btn-primary">İptal Et</button>
-                                        </div>
-                                    </form>
+                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="OrderDetails" asp-route-orderId="@item.Id"><input type="submit" value="Detay" class="btn btn-block btn-primary" /></a>
+
+                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="CancelOrder" asp-route-orderId="@item.Id"><input type="submit" value="İptal Et" class="btn btn-block btn-primary" /></a>
                                 </td>
                             }
                             else
                             {
-                        <td style="display: flex;">
-                            <form class="col-12" style="display:inline-block;" asp-controller="Home" asp-action="OrderDetails">
-                                <div class="btn-sec">
-                                    <button name="orderId" value="@item.Id" class="btn btn-block btn-primary">Detay</button>
-                                </div>
-                            </form>
-                        </td>
+                                <td style="display: flex;">
+                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="OrderDetails" asp-route-orderId="@item.Id"><input type="submit" value="Detay" class="btn btn-block btn-primary" /></a>
+                                </td>
                             }
                         </tr>
                     }

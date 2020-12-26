@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Book>
-@{var count = 0;var book1 = Model.Last();}
+@{var count = 0; var book1 = Model.Last();}
+
+@{
+    ViewData["Title"] = "Kitap Detayı";
+}
 
 <section class="product-sec">
     <div class="container">
@@ -49,6 +53,10 @@
                 <p>@book1.Description_TR</p>
                 <ul>
                     <li>
+                        <span class="name">Stok Durumu</span><span class="clm">:</span>
+                        <span class="price" style="text-decoration: none;">@book1.Stock</span>
+                    </li>
+                    <li>
                         <span class="name">Normal Fiyat</span><span class="clm">:</span>
                         <span class="price">@(book1.Price * 2) TL</span>
                     </li>
@@ -58,11 +66,19 @@
                     </li>
                     <li><span class="save-cost">Kazancınız : @book1.Price TL (%50)</span></li>
                 </ul>
-                <form asp-controller="Home" asp-action="AddBookToBasket" method="post">
+                @if (book1.Stock != 0)
+                {
+                    <form asp-controller="Home" asp-action="AddBookToBasket" method="post">
+                        <div class="btn-sec">
+                            <button name="bookId" value="@book1.Id" class="btn black">Sepete Ekle</button>
+                        </div>
+                    </form>
+                } else
+                {
                     <div class="btn-sec">
-                        <button name="bookId" value="@book1.Id" class="btn black">Sepete Ekle</button>
+                        Kitap stoklarda bulunmuyor.
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
@@ -71,13 +87,13 @@
     <div class="container">
         <div class="recomended-sec">
             <h2>Bu kitapları da beğenebilirsiniz</h2>
-            <div class="row" >
+            <div class="row">
                 @foreach (var book in Model)
                 {
-                    @if (count != Model.Count()-1)
+                    @if (count != Model.Count() - 1)
                     {
 
-                        <div class="col-lg-3 col-md-6"  >
+                        <div class="col-lg-3 col-md-6">
                             <div class="item">
                                 <img src="~/images/@book.MainPhoto" style="height:150px;" class="img-responsive">
                                 <h3>@book.Name_TR</h3>

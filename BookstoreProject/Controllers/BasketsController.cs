@@ -28,16 +28,16 @@ namespace BookstoreProject.Controllers
         public async Task<IActionResult> Index()
         {
             Basket basket = _context.Baskets
-                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
+                .Where(x => x.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
                 .FirstOrDefault();
 
             if(basket == null)
             {
                 Basket newBasket = new Basket
                 {
-                    Durum = "YENI",
+                    Status = "YENI",
                     Active = true,
-                    UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    UserDetails = await _userManager.GetUserAsync(User)
                 };
 
                 _context.Add(newBasket);
@@ -46,7 +46,7 @@ namespace BookstoreProject.Controllers
             {
                 List<BasketItem> basketItems = await _context.BasketItems
                         .Include(x => x.Basket)
-                        .Where(x => x.Basket.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Basket.Active == true && x.Active == true)
+                        .Where(x => x.Basket.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Basket.Active == true && x.Active == true)
                         .Include(x => x.Book).ToListAsync();
 
                 if (basketItems.Count != 0)
@@ -61,7 +61,7 @@ namespace BookstoreProject.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> removeFromBasket(int? bookId)
+        public async Task<IActionResult> RemoveFromBasket(int? bookId)
         {
             if (bookId == null)
             {
@@ -69,7 +69,7 @@ namespace BookstoreProject.Controllers
             }
 
             Basket basket = _context.Baskets
-                .Where(x => x.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
+                .Where(x => x.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
                 .FirstOrDefault();
 
             if(basket != null)
@@ -92,7 +92,7 @@ namespace BookstoreProject.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> BuyBooksAsync(int? basketId)
+        public async Task<IActionResult> BuyBooks(int? basketId)
         {
             Basket basket = await _context.Baskets
                 .Where(x => x.Id == basketId)
@@ -101,23 +101,39 @@ namespace BookstoreProject.Controllers
             if(basket != null)
             {
                 List<BasketItem> basketItem = await _context.BasketItems
+                    .Include(x => x.Book)
                     .Where(x => x.BasketId == basketId && x.Active == true)
                     .ToListAsync();
 
-                for(int i = 1; i < basketItem.Count; i++)
+                for(int i = 0; i < basketItem.Count; i++)
                 {
-                    // stok dusmuyor
-                    basketItem[i].Book.Stock -= 1;
-                    _context.Update(basketItem);
+                    Book _book = basketItem[i].Book;
+
+                    if(_book.Stock == 0)
+                    {
+                        for(int j = 0; j < i; j++)
+                        {
+                            Book tmpBook = basketItem[i].Book;
+                            tmpBook.Stock++;
+                            _context.Update(tmpBook);
+                        }
+
+                        TempData["SiparisMesaj"] = "Siparişiniz alınamadı. Stoktan düşmüş kitap içeriyor : "
+                            + _book.Name_TR;
+                        return RedirectToAction("Index", "Baskets");
+                    }
+
+                    _book.Stock = _book.Stock - 1;
+                    _context.Update(_book);
                 }
 
                 basket.Active = false;
-                basket.Durum = "KARGO";
+                basket.Status = "KARGO";
                 _context.Update(basket);
                 await _context.SaveChangesAsync();
             }
 
-            TempData["SiparisMesaj"] = "Siparisiniz Alindi. Siparis Numaraniz : " + basketId;
+            TempData["SiparisMesaj"] = "Siparişiniz alındı. Sipariş numaranız : " + basketId;
             return RedirectToAction("Index", "Baskets");
         }
     }

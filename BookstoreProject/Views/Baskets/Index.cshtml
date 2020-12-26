@@ -9,7 +9,7 @@
         @if (TempData["SiparisMesaj"] != null)
         {
             <div class="row">
-                <h1>@TempData["SiparisMesaj"]</h1>
+                <h4>@TempData["SiparisMesaj"]</h4>
             </div>
             <div class="row">
                 <form asp-controller="Home" asp-action="Index">
@@ -54,7 +54,7 @@
                         <form asp-controller="Baskets" asp-action="BuyBooks" method="post">
                             <div class="btn-sec">
                                 <span>Toplam Fiyat : <span>@ViewData["ToplamFiyat"]</span></span>
-                                <button name="basketId" value="@ViewData["BasketID"]" style="margin-left : 20px;" class="btn black">Satın Al</button>
+                                <button name="basketId" value="@ViewData["BasketID"]" style="margin-left : 20px;" class="btn black">Siparişi Tamamla</button>
                             </div>
                         </form>
                     </div>

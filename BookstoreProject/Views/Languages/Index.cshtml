@@ -64,7 +64,9 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#languagesTable').DataTable();
+            $('#languagesTable').DataTable({
+                language: TurkishLanguageRule // datatable-turkish.js de tanimlanan kurallar
+            });
         });
     </script>
 }

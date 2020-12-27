@@ -106,7 +106,9 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#bookTable').DataTable();
+            $('#bookTable').DataTable({
+                language: TurkishLanguageRule // datatable-turkish.js de tanimlanan kurallar
+            });
         });
     </script>
 }

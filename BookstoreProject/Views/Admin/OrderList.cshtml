@@ -51,7 +51,9 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#orderTable').DataTable();
+            $('#orderTable').DataTable({
+                language: TurkishLanguageRule // datatable-turkish.js de tanimlanan kurallar
+            });
         });
     </script>
 }

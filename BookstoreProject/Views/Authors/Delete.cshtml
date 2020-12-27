@@ -7,7 +7,7 @@
 
     @if (Model.Active == true)
     {
-        <h3>Pasif Yapmak İstediğinizden Emin Misiniz?</h3>
+        <h3>Pasif Etmek İstediğinizden Emin Misiniz?</h3>
         <div>
 
             <hr />
@@ -17,12 +17,6 @@
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.Name)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Active)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Active)
                 </dd>
             </dl>
             <div class="row">
@@ -36,7 +30,7 @@
                 <div class="col-md-3">
                     <form asp-action="Index">
                         <div class="form-group">
-                            <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
+                            <input type="submit" value="Listeye Geri Dön" class="btn btn-block btn-primary" />
                         </div>
                     </form>
                 </div>
@@ -48,7 +42,7 @@
     }
     else
     {
-        <h3>Aktif Yapmak İstediğinizden Emin Misiniz?</h3>
+        <h3>Aktif Etmek İstediğinizden Emin Misiniz?</h3>
         <div>
 
             <hr />
@@ -58,12 +52,6 @@
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.Name)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Active)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Active)
                 </dd>
             </dl>
             <div class="row">
@@ -77,7 +65,7 @@
                 <div class="col-md-3">
                     <form asp-action="Index">
                         <div class="form-group">
-                            <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
+                            <input type="submit" value="Listeye Geri Dön" class="btn btn-block btn-primary" />
                         </div>
                     </form>
                 </div>

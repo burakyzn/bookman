@@ -10,7 +10,7 @@ namespace BookstoreProject.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Türkçe İsim")]
+        [Display(Name = "İsim")]
         public string Name { get; set; }
 
         [Display(Name = "Aktiflik")]

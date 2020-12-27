@@ -87,7 +87,8 @@ namespace BookstoreProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN,Active")] Category category)
         {
-            if (id != category.Id)
+            Category currentCategory= _context.Categories.Where(x => x.Id == id).FirstOrDefault();
+            if (id != category.Id|| currentCategory==null)
             {
                 return NotFound();
             }
@@ -96,7 +97,9 @@ namespace BookstoreProject.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    currentCategory.Name_TR = category.Name_TR;
+                    currentCategory.Name_EN = category.Name_EN;
+                    _context.Update(currentCategory);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -112,7 +115,7 @@ namespace BookstoreProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(currentCategory);
         }
 
         

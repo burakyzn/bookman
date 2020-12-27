@@ -87,16 +87,18 @@ namespace BookstoreProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Active")] Author author)
         {
-            if (id != author.Id)
+            Author currentAuthor = _context.Authors.Where(x => x.Id == id).FirstOrDefault();
+            if (id != author.Id ||currentAuthor==null)
             {
                 return NotFound();
             }
-
+            
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(author);
+                    currentAuthor.Name = author.Name;
+                    _context.Update(currentAuthor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -112,7 +114,7 @@ namespace BookstoreProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(author);
+            return View(currentAuthor);
         }
 
        

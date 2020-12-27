@@ -87,7 +87,8 @@ namespace BookstoreProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN,Active")] Language language)
         {
-            if (id != language.Id)
+            Language currentLanguage = _context.Languages.Where(x => x.Id == id).FirstOrDefault();
+            if (id != language.Id || currentLanguage==null)
             {
                 return NotFound();
             }
@@ -96,7 +97,9 @@ namespace BookstoreProject.Controllers
             {
                 try
                 {
-                    _context.Update(language);
+                    currentLanguage.Name_TR = language.Name_TR;
+                    currentLanguage.Name_EN = language.Name_EN;
+                    _context.Update(currentLanguage);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -112,7 +115,7 @@ namespace BookstoreProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(language);
+            return View(currentLanguage);
         }
 
         

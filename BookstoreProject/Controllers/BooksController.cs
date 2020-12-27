@@ -54,9 +54,9 @@ namespace BookstoreProject.Controllers
 
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name");
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR");
-            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR");
+            ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a => a.Active == true), "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name_TR");
+            ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name_TR");
             return View();
         }
 
@@ -145,6 +145,7 @@ namespace BookstoreProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Book book)
         {
+            //Book currentBook= _context.Books.Where(x => x.Id == id).FirstOrDefault();
             if (id != book.Id)
             {
                 return NotFound();
@@ -196,6 +197,7 @@ namespace BookstoreProject.Controllers
 
                 try
                 {
+                    
                     _context.Update(book);
                     await _context.SaveChangesAsync();
                 }

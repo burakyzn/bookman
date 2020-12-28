@@ -13,25 +13,39 @@ namespace BookstoreProject.Models
     {
         public int Id { get; set; }
 
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} En Az {2} En Fazla {1} Karakter Uzunluğunda Olmalıdır.")]
+        [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz.")]
         [Display(Name="Türkçe İsim")]
         public string Name_TR { get; set; }
 
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} En Az {2} En Fazla {1} Karakter Uzunluğunda Olmalıdır.")]
+        [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz.")]
         [Display(Name = "İngilizce İsim")]
         public string Name_EN { get; set; }
 
+        [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz.")]
         [Display(Name = "Türkçe Tanım")]
         public string Description_TR { get; set; }
 
+        [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz.")]
         [Display(Name = "İngilizce Tanım")]
         public string Description_EN { get; set; }
 
+        
+        [RegularExpression(@"^[1-9][0-9]{0,3}$",ErrorMessage = "{0} En Az 1 ve 9999 arasında olmalıdır.")]
+        //[Range(1, 1000, ErrorMessage = "{0} En Az {1} En Fazla {2} Olmalıdır.")]
+        [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz.")]
         [Display(Name = "Fiyat")]
         public int Price { get; set; }
-        [Display(Name = "Stok")]
 
+        [RegularExpression(@"^[1-9][0-9]*$", ErrorMessage = "{0} En Az 1 olmalıdır.")]
+        [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz.")]
+        [Display(Name = "Stok")]
         public int Stock { get; set; }
 
-        [Display(Name = "Basim Yıl")]
+        [RegularExpression(@"^[1-9][0-9]{3}$", ErrorMessage = "{0}'ı 4 Haneli Olmalıdır. ")]
+        [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz.")]
+        [Display(Name = "Basım Yıl")]
         public int PublishYear { get; set; }
 
         [Display(Name = "Kategori")]

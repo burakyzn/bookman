@@ -13,6 +13,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BookstoreProject.Models;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 namespace BookstoreProject
 {
@@ -28,6 +32,16 @@ namespace BookstoreProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
+
+            services
+                .AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -37,7 +51,8 @@ namespace BookstoreProject
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.Configure<IdentityOptions>(options => {
+            services.Configure<IdentityOptions>(options =>
+            {
                 options.Password.RequiredLength = 5;
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -49,6 +64,20 @@ namespace BookstoreProject
             });
 
             services.AddControllersWithViews();
+
+            services.Configure<RequestLocalizationOptions>(
+    opt =>
+    {
+        var supportedCulteres = new List<CultureInfo>
+        {
+                        new CultureInfo("tr-TR"),
+                        new CultureInfo("en-US")
+        };
+        opt.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("tr-TR");
+        opt.SupportedCultures = supportedCulteres;
+        opt.SupportedUICultures = supportedCulteres;
+    });
+
             services.AddRazorPages();
         }
 
@@ -70,6 +99,8 @@ namespace BookstoreProject
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
             app.UseAuthentication();
             app.UseAuthorization();

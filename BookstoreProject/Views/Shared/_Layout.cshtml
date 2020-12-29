@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<UserDetails> SignInManager
 @inject UserManager<UserDetails> UserManager
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -20,6 +21,9 @@
         <div class="header-top">
             <div class="container">
                 <div class="row">
+                    <div class="col-md-3">
+                        <partial name="_Culture" />
+                    </div>
                     <div class="col-md-6">
                         <h5>150 TL Üzeri Kitap Alışverişine Kargo Ücretsiz</h5>
                     </div>

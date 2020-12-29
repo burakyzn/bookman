@@ -66,6 +66,15 @@ namespace BookstoreProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(book.MainPhotoFile == null || book.SecondPhotoFile == null || book.ThirdPhotoFile == null)
+                {
+                    ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
+                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
+                    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
+                    ViewData["ErrorMessage"] = "Fotoğraf eklemeden kitap yaratılamaz.";
+                    return View();
+                }
+
                 string[] imgext = new string[3];
 
                 imgext[0] = Path.GetExtension(book.MainPhotoFile.FileName);
@@ -115,6 +124,7 @@ namespace BookstoreProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
@@ -153,6 +163,15 @@ namespace BookstoreProject.Controllers
 
             if (ModelState.IsValid)
             {
+                if (book.MainPhotoFile == null || book.SecondPhotoFile == null || book.ThirdPhotoFile == null)
+                {
+                    ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
+                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
+                    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
+                    ViewData["ErrorMessage"] = "Fotoğraf eklemeden kitap yaratılamaz.";
+                    return View();
+                }
+
                 string[] imgext = new string[3];
 
                 imgext[0] = Path.GetExtension(book.MainPhotoFile.FileName);

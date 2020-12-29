@@ -5,7 +5,11 @@
 }
 <div class="container">
     <h1>Kitap Ekle</h1>
-
+    <hr />
+    @if (ViewData["ErrorMessage"] != null)
+    {
+        <p style="margin-top:10px; color:red;">@ViewData["ErrorMessage"]</p>
+    }
 
     <form asp-action="Create" enctype="multipart/form-data">
         <div class="row">
@@ -102,7 +106,7 @@
 
         </div>
     </form>
-    
+
 
 
 </div>

@@ -119,7 +119,7 @@ namespace BookstoreProject.Controllers
                         }
 
                         TempData["SiparisMesaj"] = "Siparişiniz alınamadı. Stoktan düşmüş kitap içeriyor : "
-                            + _book.Name_TR;
+                            + _book.Name;
                         return RedirectToAction("Index", "Baskets");
                     }
 

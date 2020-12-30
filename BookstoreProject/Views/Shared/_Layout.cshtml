@@ -30,7 +30,7 @@
                         <partial name="_Culture" />
                     </div>
                     <div class="col-md-6">
-                        <h5>150 TL Üzeri Kitap Alışverişine Kargo Ücretsiz</h5>
+                        <h5>@localizer["FreeShipping"]</h5>
                     </div>
                     <div class="col-md-3">
                     </div>
@@ -47,38 +47,38 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="navbar-item">
-                                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Anasayfa</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">@localizer["MainPage"]</a>
                             </li>
                             @if (SignInManager.IsSignedIn(User))
                             {
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li class="navbar-item">
-                                        <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Panel</a>
+                                        <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">@localizer["Panel"]</a>
                                     </li>
                                 }
                                 <li class="navbar-item">
                                     <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">@User.Identity.Name!</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a asp-area="" asp-controller="Home" asp-action="MyOrder" class="nav-link">Siparişlerim</a>
+                                    <a asp-area="" asp-controller="Home" asp-action="MyOrder" class="nav-link">@localizer["MyOrders"]</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a asp-area="" asp-controller="Baskets" asp-action="Index" class="nav-link">Sepetim</a>
+                                    <a asp-area="" asp-controller="Baskets" asp-action="Index" class="nav-link">@localizer["MyBasket"]</a>
                                 </li>
                                 <li class="navbar-item">
                                     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button type="submit" class="nav-link btn btn-link text-dark">Çıkış Yap</button>
+                                        <button type="submit" class="nav-link btn btn-link text-dark">@localizer["Exit"]</button>
                                     </form>
                                 </li>
                             }
                             else
                             {
                                 <li class="navbar-item">
-                                    <a asp-area="Identity" asp-page="/Account/Register" class="nav-link">Kayıt Ol</a>
+                                    <a asp-area="Identity" asp-page="/Account/Register" class="nav-link">@localizer["Register"]</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a asp-area="Identity" asp-page="/Account/Login" class="nav-link">Giriş Yap</a>
+                                    <a asp-area="Identity" asp-page="/Account/Login" class="nav-link">@localizer["LogIn"]</a>
                                 </li>
                             }
                         </ul>
@@ -105,39 +105,39 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="address">
-                        <h4>Adresimiz</h4>
+                        <h4>@localizer["Address"]</h4>
                         <h6>
-                            Sakarya Üniversitesi Bilgisayar ve Bilişim Bilimleri Fakültesi, 54187 Sakarya
+                            @localizer["Address2"]
                         </h6>
-                        <h6>Telefon : (0264) 295 69 79</h6>
-                        <h6>Email : bf@sakarya.edu.tr</h6>
+                        <h6>@localizer["Phone"]</h6>
+                        <h6>@localizer["Email"]</h6>
                     </div>
                     <div class="timing">
-                        <h4>Çalışma Saatleri</h4>
-                        <h6>Pazartesi - Cuma: 09:00 - 18:00</h6>
-                        <h6>​​Cumartesi: 09:00 - 13:00</h6>
+                        <h4>@localizer["WorkingHours"]</h4>
+                        <h6>@localizer["WorkingHours2"]</h6>
+                        <h6>​​@localizer["WorkingHours3"]</h6>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="navigation">
-                        <h4>Sayfalar</h4>
+                        <h4>@localizer["Pages"]</h4>
                         <ul>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Anasayfa</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-link">Özel</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">@localizer["MainPage"]</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-link">@localizer["Privacy"]</a></li>
                         </ul>
                     </div>
                     <div class="navigation">
-                        <h4>Yardım</h4>
+                        <h4>@localizer["Help"]</h4>
                         <ul>
-                            <li><a href="faq.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="faq.html">@localizer["FrequentlyAskedQuestions"]</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form">
-                        <h3>Bize Ulaşın</h3>
+                        <h3>@localizer["ContactUs"]</h3>
                         <h6>
-                            Bir mesajın varsa bize buradan iletebilirsin.
+                            @localizer["Message"]
                         </h6>
                         <form>
                             <div class="row">
@@ -151,7 +151,7 @@
                                     <textarea placeholder="Mesaj"></textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn black">Gönder</button>
+                                    <button class="btn black">@localizer["Send"]</button>
                                 </div>
                             </div>
                         </form>
@@ -163,7 +163,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>2020 - Tüm hakları saklıdır.</h5>
+                        <h5>@localizer["AllRightsReserved"]</h5>
                     </div>
                     <div class="col-md-6">
                         <div class="share align-middle">

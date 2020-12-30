@@ -30,7 +30,9 @@ namespace BookstoreProject.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.HasKey("Id");
 
@@ -104,10 +106,8 @@ namespace BookstoreProject.Data.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description_TR")
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LanguageId")
@@ -116,11 +116,10 @@ namespace BookstoreProject.Data.Migrations
                     b.Property<string>("MainPhoto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name_TR")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -158,11 +157,10 @@ namespace BookstoreProject.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name_TR")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -179,11 +177,10 @@ namespace BookstoreProject.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name_TR")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 

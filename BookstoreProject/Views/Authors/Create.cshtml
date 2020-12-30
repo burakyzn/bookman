@@ -1,10 +1,11 @@
-﻿@model BookstoreProject.Models.Author
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+@model BookstoreProject.Models.Author
 
 @{
-    ViewData["Title"] = "Yazar Ekle";
+    ViewData["Title"] = localizer["Title"].Value;
 }
 <div class="container">
-    <h1>Ekle</h1>
+    <h1>@localizer["AddAuthor"]</h1>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -17,7 +18,7 @@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Ekle" class="btn btn-block btn-primary" />
+                    <input type="submit" value="@localizer["Add"]" class="btn btn-block btn-primary" />
                 </div>
 
             </form>
@@ -30,15 +31,15 @@
         <div class="col-md-4">
             <form asp-action="Index">
                 <div class="form-group">
-                    <input type="submit" value="Listeye Geri Dön" class="btn btn-block btn-primary" />
+                    <input type="submit" value="@localizer["GoBackToList"]" class="btn btn-block btn-primary" />
                 </div>
             </form>
-            
+
         </div>
-       
-       
+
+
     </div>
 </div>
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

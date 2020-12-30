@@ -1,17 +1,18 @@
-﻿@model IEnumerable<BookstoreProject.Models.BasketItem>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+@model IEnumerable<BookstoreProject.Models.BasketItem>
 
 @{
-    ViewData["Title"] = "Sepet Listesi";
+    ViewData["Title"] = localizer["Title"].Value;
 }
 
 <section class="static about-sec">
     <div class="container">
-        <h1>Sepet Detayı</h1>
+        <h1>@localizer["BasketDetails"]</h1>
         <table id="orderDetailTable" class="table table-striped table-bordered" style="width:100%;">
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Book.Name_TR)
+                        @Html.DisplayNameFor(model => model.Book.Name)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Book.CategoryId)
@@ -29,10 +30,10 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Book.Name_TR)
+                            @Html.DisplayFor(modelItem => item.Book.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Book.Category.Name_TR)
+                            @Html.DisplayFor(modelItem => item.Book.Category.Name)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Book.Price)
@@ -47,12 +48,19 @@
     </div>
 </section>
 
+
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#orderDetailTable').DataTable({
-                language: TurkishLanguageRule // datatable-turkish.js de tanimlanan kurallar
-            });
+
+            var currentCulture = $('#currentCalture').text();
+            if (currentCulture == "en-US") {
+                $('#orderDetailTable').DataTable();
+            } else {
+                $('#orderDetailTable').DataTable({
+                    language: TurkishLanguageRule
+                });
+            }
         });
     </script>
 }

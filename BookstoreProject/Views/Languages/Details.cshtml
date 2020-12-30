@@ -1,26 +1,21 @@
-﻿@model BookstoreProject.Models.Language
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+@model BookstoreProject.Models.Language
 
 @{
-    ViewData["Title"] = "Dil Detaylari";
+    ViewData["Title"] = localizer["Title"].Value;
 }
 <div class="container">
-    <h1>Detaylar</h1>
+    <h1>@localizer["Details"]</h1>
 
     <div>
 
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Name_TR)
+                @Html.DisplayNameFor(model => model.Name)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Name_TR)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Name_EN)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Name_EN)
+                @Html.DisplayFor(model => model.Name)
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Active)
@@ -43,14 +38,14 @@
         <div class="col-md-3">
             <form asp-action="Edit" method="GET" asp-route-id="@Model.Id">
                 <div class="form-group">
-                    <input type="submit" value="Düzenle" class="btn btn-block btn-primary" />
+                    <input type="submit" value="@localizer["Edit"]" class="btn btn-block btn-primary" />
                 </div>
             </form>
         </div>
         <div class="col-md-3">
             <form asp-action="Index">
                 <div class="form-group">
-                    <input type="submit" value="Listeye Geri Dön" class="btn btn-block btn-primary" />
+                    <input type="submit" value="@localizer["GoBackToList"]" class="btn btn-block btn-primary" />
                 </div>
             </form>
         </div>

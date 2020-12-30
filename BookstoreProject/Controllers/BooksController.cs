@@ -55,8 +55,8 @@ namespace BookstoreProject.Controllers
         public IActionResult Create()
         {
             ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a => a.Active == true), "Id", "Name");
-            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name_TR");
-            ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name_TR");
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name");
+            ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name");
             return View();
         }
 
@@ -69,8 +69,8 @@ namespace BookstoreProject.Controllers
                 if(book.MainPhotoFile == null || book.SecondPhotoFile == null || book.ThirdPhotoFile == null)
                 {
                     ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
-                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
-                    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
+                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
+                    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
                     ViewData["ErrorMessage"] = "Fotoğraf eklemeden kitap yaratılamaz.";
                     return View();
                 }
@@ -126,8 +126,8 @@ namespace BookstoreProject.Controllers
             }
 
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
-            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
             return View(book);
         }
 
@@ -146,8 +146,8 @@ namespace BookstoreProject.Controllers
             
             //List<SelectList> degerler = _context.Authors.Where(a => a.Active == true).ToList();
             ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a=>a.Active==true), "Id", "Name", book.AuthorId);
-            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name_TR", book.CategoryId);
-            ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name_TR", book.LanguageId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name", book.CategoryId);
+            ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name", book.LanguageId);
             return View(book);
         }
 
@@ -166,8 +166,8 @@ namespace BookstoreProject.Controllers
                 if (book.MainPhotoFile == null || book.SecondPhotoFile == null || book.ThirdPhotoFile == null)
                 {
                     ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
-                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
-                    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
+                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
+                    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
                     ViewData["ErrorMessage"] = "Fotoğraf eklemeden kitap yaratılamaz.";
                     return View();
                 }
@@ -235,8 +235,8 @@ namespace BookstoreProject.Controllers
             }
 
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name_TR", book.CategoryId);
-            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name_TR", book.LanguageId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
             return View(book);
         }
 

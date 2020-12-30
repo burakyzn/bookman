@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Sepetim";
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+@{
+    ViewData["Title"] = localizer["Title"].Value;
 }
 
 @model IEnumerable<BookstoreProject.Models.BasketItem>
@@ -14,14 +15,14 @@
             <div class="row">
                 <form asp-controller="Home" asp-action="Index">
                     <div class="form-group">
-                        <input type="submit" value="Anasayfaya Dön" class="btn btn-block btn-primary" />
+                        <input type="submit" value="@localizer["GoBackToHome"]" class="btn btn-block btn-primary" />
                     </div>
                 </form>
             </div>
         }
         else
         {
-            <h2>Sepetim</h2>
+        <h2>@localizer["MyBasket"]</h2>
             <div class="recent-book-sec">
                 <div class="row">
                     @if (Model != null)
@@ -33,8 +34,8 @@
                                 <div class="col-md-3">
                                     <div class="item">
                                         <img src="~/images/@_basket.Book.MainPhoto" class="img" />
-                                        <h3><a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@_basket.Id">@_basket.Book.Name_TR</a></h3>
-                                        <h6><span class="price">@_basket.Book.Price TL</span> / <a asp-controller="Baskets" asp-action="removeFromBasket" asp-route-bookId="@_basket.Book.Id">Sepetimden Çıkar</a></h6>
+                                        <h3><a asp-controller="Home" asp-action="BookDetails" asp-route-searchId="@_basket.Id">@_basket.Book.Name</a></h3>
+                                        <h6><span class="price">@_basket.Book.Price @localizer["Currency"]</span> / <a asp-controller="Baskets" asp-action="removeFromBasket" asp-route-bookId="@_basket.Book.Id">@localizer["OutOfMyBasket"]</a></h6>
                                     </div>
                                 </div>
                             }
@@ -42,7 +43,7 @@
                     }
                     else
                     {
-                        <p style="margin-left:50px;">Sepetin boş görünüyor. Hemen yeni kitaplara göz at.</p>
+                <p style="margin-left:50px;">@localizer["BasketLooksEmpty"]</p>
                     }
                 </div>
             </div>
@@ -53,8 +54,8 @@
                     <div class="row">
                         <form asp-controller="Baskets" asp-action="BuyBooks" method="post">
                             <div class="btn-sec">
-                                <span>Toplam Fiyat : <span>@ViewData["ToplamFiyat"]</span></span>
-                                <button name="basketId" value="@ViewData["BasketID"]" style="margin-left : 20px;" class="btn black">Siparişi Tamamla</button>
+                                <span>@localizer["TotalPrice"]<span>@ViewData["ToplamFiyat"]</span></span>
+                                <button name="basketId" value="@ViewData["BasketID"]" style="margin-left : 20px;" class="btn black">@localizer["CompleteTheOrder"]</button>
                             </div>
                         </form>
                     </div>

@@ -54,7 +54,7 @@ namespace BookstoreProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name_TR,Name_EN,Active")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Active")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BookstoreProject.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN,Active")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Active")] Category category)
         {
             Category currentCategory= _context.Categories.Where(x => x.Id == id).FirstOrDefault();
             if (id != category.Id|| currentCategory==null)
@@ -97,8 +97,7 @@ namespace BookstoreProject.Controllers
             {
                 try
                 {
-                    currentCategory.Name_TR = category.Name_TR;
-                    currentCategory.Name_EN = category.Name_EN;
+                    currentCategory.Name = category.Name;
                     _context.Update(currentCategory);
                     await _context.SaveChangesAsync();
                 }

@@ -54,7 +54,7 @@ namespace BookstoreProject.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name_TR,Name_EN,Active")] Language language)
+        public async Task<IActionResult> Create([Bind("Id,Name,Active")] Language language)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BookstoreProject.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name_TR,Name_EN,Active")] Language language)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Active")] Language language)
         {
             Language currentLanguage = _context.Languages.Where(x => x.Id == id).FirstOrDefault();
             if (id != language.Id || currentLanguage==null)
@@ -97,8 +97,7 @@ namespace BookstoreProject.Controllers
             {
                 try
                 {
-                    currentLanguage.Name_TR = language.Name_TR;
-                    currentLanguage.Name_EN = language.Name_EN;
+                    currentLanguage.Name = language.Name;
                     _context.Update(currentLanguage);
                     await _context.SaveChangesAsync();
                 }

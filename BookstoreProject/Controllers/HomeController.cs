@@ -59,7 +59,7 @@ namespace BookstoreProject.Controllers
       
         public async Task<IActionResult> SearchBooks(string searchItem)
         {
-            List<Book> kitaplar = await _context.Books.Where(x => x.Name_TR.ToLower().Contains(searchItem.ToLower())).ToListAsync();
+            List<Book> kitaplar = await _context.Books.Where(x => x.Name.ToLower().Contains(searchItem.ToLower())).ToListAsync();
             return View(kitaplar);
         }
 

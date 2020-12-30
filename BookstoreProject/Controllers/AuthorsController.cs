@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BookstoreProject.Data;
 using BookstoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace BookstoreProject.Controllers
 {
@@ -170,5 +172,6 @@ namespace BookstoreProject.Controllers
         {
             return _context.Authors.Any(e => e.Id == id);
         }
+
     }
 }

@@ -1,10 +1,11 @@
-﻿@model BookstoreProject.Models.Category
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+@model BookstoreProject.Models.Category
 
 @{
-    ViewData["Title"] = "Kategori Duzenle";
+    ViewData["Title"] = localizer["Title"].Value;
 }
 <div class="container">
-    <h1>Düzenle</h1>
+    <h1>@localizer["Edit"]</h1>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -12,17 +13,12 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
-                    <label asp-for="Name_TR" class="control-label"></label>
-                    <input asp-for="Name_TR" class="form-control" />
-                    <span asp-validation-for="Name_TR" class="text-danger"></span>
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Name_EN" class="control-label"></label>
-                    <input asp-for="Name_EN" class="form-control" />
-                    <span asp-validation-for="Name_EN" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Kaydet" class="btn btn-block btn-primary" />
+                    <input type="submit" value="@localizer["Save"]" class="btn btn-block btn-primary" />
                 </div>
             </form>
         </div>
@@ -32,12 +28,12 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <input type="submit" value="LİSTEYE GERİ DÖN" class="btn btn-block btn-primary" />
+                    <input type="submit" value="@localizer["GoBackToList"]" class="btn btn-block btn-primary" />
                 </div>
             </div>
         </div>
     </form>
 </div>
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

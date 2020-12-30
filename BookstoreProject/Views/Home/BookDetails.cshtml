@@ -1,16 +1,14 @@
-﻿@model IEnumerable<Book>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+
+@model IEnumerable<Book>
 @{var count = 0; var book1 = Model.Last();}
 
 @{
-    ViewData["Title"] = "Kitap Detayı";
+    ViewData["Title"] = localizer["Title"].Value;
 }
 
 <section class="product-sec">
     <div class="container">
-
-
-
-
         <h1>@book1.Name_TR</h1>
         <div class="row">
             <div class="col-md-6 slider-sec">
@@ -53,30 +51,31 @@
                 <p>@book1.Description_TR</p>
                 <ul>
                     <li>
-                        <span class="name">Stok Durumu</span><span class="clm">:</span>
+                        <span class="name">@localizer["Stock"]</span><span class="clm">:</span>
                         <span class="price" style="text-decoration: none;">@book1.Stock</span>
                     </li>
                     <li>
-                        <span class="name">Normal Fiyat</span><span class="clm">:</span>
-                        <span class="price">@(book1.Price * 2) TL</span>
+                        <span class="name">@localizer["Price"]</span><span class="clm">:</span>
+                        <span class="price">@(book1.Price * 2) @localizer["Currency"]</span>
                     </li>
                     <li>
-                        <span class="name">İndirimli Fiyat</span><span class="clm">:</span>
-                        <span class="price final">@book1.Price TL</span>
+                        <span class="name">@localizer["DiscPrice"]</span><span class="clm">:</span>
+                        <span class="price final">@book1.Price @localizer["Currency"]</span>
                     </li>
-                    <li><span class="save-cost">Kazancınız : @book1.Price TL (%50)</span></li>
+                    <li><span class="save-cost">@localizer["Profit"] : @book1.Price @localizer["Currency"] (%50)</span></li>
                 </ul>
                 @if (book1.Stock != 0)
                 {
                     <form asp-controller="Home" asp-action="AddBookToBasket" method="post">
                         <div class="btn-sec">
-                            <button name="bookId" value="@book1.Id" class="btn black">Sepete Ekle</button>
+                            <button name="bookId" value="@book1.Id" class="btn black">@localizer["AddBasket"]</button>
                         </div>
                     </form>
-                } else
+                }
+                else
                 {
                     <div class="btn-sec">
-                        Kitap stoklarda bulunmuyor.
+                        @localizer["StockStatus"]
                     </div>
                 }
             </div>
@@ -86,7 +85,7 @@
 <section class="related-books">
     <div class="container">
         <div class="recomended-sec">
-            <h2>Bu kitapları da beğenebilirsiniz</h2>
+            <h2>@localizer["OtherBooks"]</h2>
             <div class="row">
                 @foreach (var book in Model)
                 {

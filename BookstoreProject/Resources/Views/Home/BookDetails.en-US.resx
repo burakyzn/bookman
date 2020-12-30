@@ -117,19 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Buy" xml:space="preserve">
-    <value>Satın Al</value>
+  <data name="AddBasket" xml:space="preserve">
+    <value>Add To Basket</value>
   </data>
   <data name="Currency" xml:space="preserve">
-    <value>₺</value>
+    <value>$</value>
   </data>
-  <data name="NoBookMessage" xml:space="preserve">
-    <value>Yeni eklenen bir kitap yok.</value>
+  <data name="DiscPrice" xml:space="preserve">
+    <value>Discounted Price</value>
   </data>
-  <data name="Slogan" xml:space="preserve">
-    <value>Yeni Eklenen Kitaplar</value>
+  <data name="OtherBooks" xml:space="preserve">
+    <value>You may also like these books.</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Normal Price</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Profit</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="StockStatus" xml:space="preserve">
+    <value>This book is out of stock.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Anasayfa</value>
+    <value>Book Details</value>
   </data>
 </root>

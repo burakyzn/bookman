@@ -11,6 +11,8 @@ using BookstoreProject.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace BookstoreProject.Controllers
 {
@@ -184,6 +186,17 @@ namespace BookstoreProject.Controllers
                 .ToListAsync();
 
             return View(basketItems);
+        }
+
+        [HttpPost]
+        public IActionResult LangSetting(string culture)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions {Expires = DateTimeOffset.Now.AddDays(10)}
+                );
+            return RedirectToAction(nameof(Index));
         }
     }
 }

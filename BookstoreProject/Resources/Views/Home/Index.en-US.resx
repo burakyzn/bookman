@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Buy" xml:space="preserve">
-    <value>Buy It</value>
+    <value>Buy Now</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>$</value>
   </data>
   <data name="NoBookMessage" xml:space="preserve">
     <value>There is no new book added.</value>

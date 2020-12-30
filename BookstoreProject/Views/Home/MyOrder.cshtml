@@ -1,12 +1,13 @@
 ﻿@model IEnumerable<BookstoreProject.Models.Basket>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
 
 @{
-    ViewData["Title"] = "Kitap Listesi";
+    ViewData["Title"] = localizer["Title"].Value;
 }
 
 <section class="static about-sec">
     <div class="container">
-        <h1>Siparişlerim</h1>
+        <h1>@localizer["Title"]</h1>
         @if (TempData["HataMesaj"] != null)
         {
             <h3>@TempData["HataMesaj"]</h3>
@@ -22,7 +23,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Status)
                         </th>
-                        <th>İşlemler</th>
+                        <th>@localizer["Action"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,15 +39,15 @@
                             @if (item.Status == "KARGO")
                             {
                                 <td style="display: flex;">
-                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="OrderDetails" asp-route-orderId="@item.Id"><input type="submit" value="Detay" class="btn btn-block btn-primary" /></a>
+                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="OrderDetails" asp-route-orderId="@item.Id"><input type="submit" value="@localizer["btnDetail"]" class="btn btn-block btn-primary" /></a>
 
-                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="CancelOrder" asp-route-orderId="@item.Id"><input type="submit" value="İptal Et" class="btn btn-block btn-primary" /></a>
+                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="CancelOrder" asp-route-orderId="@item.Id"><input type="submit" value="@localizer["btnCancel"]" class="btn btn-block btn-primary" /></a>
                                 </td>
                             }
                             else
                             {
                                 <td style="display: flex;">
-                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="OrderDetails" asp-route-orderId="@item.Id"><input type="submit" value="Detay" class="btn btn-block btn-primary" /></a>
+                                    <a style="padding: 5px;width: 50%;" asp-controller="Home" asp-action="OrderDetails" asp-route-orderId="@item.Id"><input type="submit" value="@localizer["btnDetail"]" class="btn btn-block btn-primary" /></a>
                                 </td>
                             }
                         </tr>
@@ -56,7 +57,7 @@
         }
         else
         {
-            <p style="margin-left:50px;">Daha önce hiç sipariş tamamlamamışsın. Hemen alışveriş yapabilirsin :)</p>
+            <p style="margin-left:50px;">@localizer["NoOrder"]</p>
         }
     </div>
 </section>
@@ -64,9 +65,15 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#myOrderTable').DataTable({
-                language: TurkishLanguageRule // datatable-turkish.js de tanimlanan kurallar
-            });
+            var currentCulture = $('#currentCalture').text();
+
+            if (currentCulture == "en-US") {
+                $('#myOrderTable').DataTable();
+            } else {
+                $('#myOrderTable').DataTable({
+                    language: TurkishLanguageRule
+                });
+            }
         });
     </script>
 }

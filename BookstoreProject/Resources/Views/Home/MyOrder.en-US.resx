@@ -117,19 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Buy" xml:space="preserve">
-    <value>Satın Al</value>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
   </data>
-  <data name="Currency" xml:space="preserve">
-    <value>₺</value>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="NoBookMessage" xml:space="preserve">
-    <value>Yeni eklenen bir kitap yok.</value>
+  <data name="btnDetail" xml:space="preserve">
+    <value>Detail</value>
   </data>
-  <data name="Slogan" xml:space="preserve">
-    <value>Yeni Eklenen Kitaplar</value>
+  <data name="NoOrder" xml:space="preserve">
+    <value>No previously completed orders.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Anasayfa</value>
+    <value>My Orders</value>
   </data>
 </root>

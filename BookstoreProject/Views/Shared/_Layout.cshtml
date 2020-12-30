@@ -2,8 +2,13 @@
 @inject SignInManager<UserDetails> SignInManager
 @inject UserManager<UserDetails> UserManager
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+
+@{
+    var currentCulture = System.Globalization.CultureInfo.CurrentCulture;
+}
+
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="@currentCulture">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -173,6 +178,8 @@
             </div>
         </div>
     </footer>
+
+    <div style="display:none" id="currentCalture">@currentCulture</div>
     <script type="text/javascript" src="~/js/datatable-turkish.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

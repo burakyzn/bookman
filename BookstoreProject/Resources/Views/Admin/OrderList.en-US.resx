@@ -120,6 +120,12 @@
   <data name="Cargo" xml:space="preserve">
     <value>Cargo</value>
   </data>
+  <data name="cargo1" xml:space="preserve">
+    <value>Waiting for shipping.</value>
+  </data>
+  <data name="completed" xml:space="preserve">
+    <value>The order has arrived.</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>

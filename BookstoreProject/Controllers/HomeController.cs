@@ -13,6 +13,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
 
 namespace BookstoreProject.Controllers
 {
@@ -20,11 +21,12 @@ namespace BookstoreProject.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<UserDetails> _userManager;
-
-        public HomeController(ApplicationDbContext context, UserManager<UserDetails> userManager)
+        private readonly IStringLocalizer<HomeController> _localizer;
+        public HomeController(ApplicationDbContext context, UserManager<UserDetails> userManager, IStringLocalizer<HomeController> localizer)
         {
             _context = context;
             _userManager = userManager;
+            _localizer=localizer;
         }
 
         public async Task<IActionResult> Index()
@@ -69,10 +71,10 @@ namespace BookstoreProject.Controllers
             switch (statusCode)
             {
                 case 901:
-                    ViewBag.ErrorMessage = "Hata böyle bir kitap yok veya ulaşılamıyor.";
+                    ViewBag.ErrorMessage = _localizer["ErrorMessage1"];//"Hata böyle bir kitap yok veya ulaşılamıyor.";
                     break;
                 default:
-                    ViewBag.ErrorMessage = "Hata böyle bir sayfa yok veya ulaşılamıyor.";
+                    ViewBag.ErrorMessage = _localizer["ErrorMessage2"]; //"Hata böyle bir sayfa yok veya ulaşılamıyor.";
                     break;
             }
             return View();
@@ -154,7 +156,7 @@ namespace BookstoreProject.Controllers
 
             if(basket == null)
             {
-                TempData["HataMesaj"] = "Böyle bir sipariş bulunamadı.";
+                TempData["HataMesaj"] = _localizer["ErrorMessage3"];
             } else
             {
                 basket.Status = "IPTAL";

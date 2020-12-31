@@ -10,6 +10,7 @@ using BookstoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Localization;
 
 namespace BookstoreProject.Controllers
 {
@@ -18,11 +19,12 @@ namespace BookstoreProject.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnviroment;
-
-        public BooksController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        private readonly IStringLocalizer<BooksController> _localizer;
+        public BooksController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, IStringLocalizer<BooksController> localizer)
         {
             _context = context;
             _hostEnviroment = hostEnvironment;
+            _localizer = localizer;
         }
 
 
@@ -71,7 +73,7 @@ namespace BookstoreProject.Controllers
                     ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
                     ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
                     ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
-                    ViewData["ErrorMessage"] = "Fotoğraf eklemeden kitap yaratılamaz.";
+                    ViewData["ErrorMessage"] = _localizer["ErrorMessage1"];//"Fotoğraf eklemeden kitap yaratılamaz.";
                     return View();
                 }
 
@@ -168,7 +170,7 @@ namespace BookstoreProject.Controllers
                     ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
                     ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
                     ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
-                    ViewData["ErrorMessage"] = "Fotoğraf eklemeden kitap yaratılamaz.";
+                    ViewData["ErrorMessage"] = _localizer["ErrorMessage1"];
                     return View();
                 }
 

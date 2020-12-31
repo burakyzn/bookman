@@ -86,7 +86,7 @@
                                 <span class="quntity">3</span>
                             </div>*@
                         <form id="searchForm" onsubmit="return checkSearchForm()" asp-controller="Home" asp-action="SearchBooks" class="form-inline my-2 my-lg-0" method="get" onSubmit="return checkform()">
-                            <input id="txtSearchItem" class="form-control mr-sm-2" name="searchItem" type="search" placeholder="Ara" aria-label="Search">
+                            <input id="txtSearchItem" class="form-control mr-sm-2" name="searchItem" type="search" placeholder="@localizer["Search"]" aria-label="Search">
                             <a class="fa fa-search" href="javascript:{}" onclick="checkSearchForm()"></a>
                         </form>
                     </div>
@@ -139,13 +139,13 @@
                         <form>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input placeholder="İsim" required>
+                                    <input placeholder="@localizer["Name"]" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" placeholder="Email" required>
+                                    <input type="email" placeholder="@localizer["email1"]" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea placeholder="Mesaj"></textarea>
+                                    <textarea placeholder="@localizer["Message1"]"></textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn black">@localizer["Send"]</button>

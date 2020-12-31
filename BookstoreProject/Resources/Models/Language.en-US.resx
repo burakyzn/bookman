@@ -120,6 +120,15 @@
   <data name="Aktiflik" xml:space="preserve">
     <value>Activity</value>
   </data>
+  <data name="Minimum {2} Karakter Maximum {1} Karakter Girilebilir." xml:space="preserve">
+    <value>Minimum {2} characters and a maximum {1} characters can be entered.</value>
+  </data>
+  <data name="Sadece Harf Giriniz." xml:space="preserve">
+    <value>Only Enter Letters.</value>
+  </data>
+  <data name="{0} Alanı Boş Bırakılamaz" xml:space="preserve">
+    <value>{0} field cannot be left blank.</value>
+  </data>
   <data name="İsim" xml:space="preserve">
     <value>Name</value>
   </data>

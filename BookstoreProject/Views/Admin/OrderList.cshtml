@@ -36,6 +36,14 @@
                             <span style="margin-right:10px;">@Html.DisplayFor(modelItem => item.UserDetails.Soyad)</span>
                         </td>
                         <td>
+                            @if(item.Status=="KARGO")
+                            {
+                                <span>@localizer["cargo1"]</span>
+                            }
+                            else
+                            {
+                                <span>@localizer["completed"]</span>
+                            }
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
                         <td style="display:flex;">

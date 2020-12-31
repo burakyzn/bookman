@@ -34,7 +34,14 @@
                                 @Html.DisplayFor(modelItem => item.Id)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Status)
+                                @if (item.Status == "KARGO")
+                                {
+                                    <span>@localizer["Cargo"]</span>
+                                }
+                                else
+                                {
+                                    <span>@localizer["Completed"]</span>
+                                }
                             </td>
                             @if (item.Status == "KARGO")
                             {

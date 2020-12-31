@@ -126,6 +126,12 @@
   <data name="btnDetail" xml:space="preserve">
     <value>Detay</value>
   </data>
+  <data name="Cargo" xml:space="preserve">
+    <value>Kargolanmak için bekliyor.</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Sipariş kullanıcıya ulaştı.</value>
+  </data>
   <data name="NoOrder" xml:space="preserve">
     <value>Daha önce tamamlanan bir siparişiniz yok.</value>
   </data>

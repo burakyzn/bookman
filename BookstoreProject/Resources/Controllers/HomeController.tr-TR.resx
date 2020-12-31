@@ -117,25 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Action" xml:space="preserve">
-    <value>Action</value>
+  <data name="ErrorMessage1" xml:space="preserve">
+    <value>Hata böyle bir kitap yok veya ulaşılamıyor.</value>
   </data>
-  <data name="btnCancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="ErrorMessage2" xml:space="preserve">
+    <value>Hata böyle bir sayfa yok veya ulaşılamıyor</value>
   </data>
-  <data name="btnDetail" xml:space="preserve">
-    <value>Detail</value>
+  <data name="ErrorMessage3" xml:space="preserve">
+    <value>Böyle bir sipariş bulunamadı.</value>
   </data>
-  <data name="Cargo" xml:space="preserve">
-    <value>Waiting for shipping.</value>
-  </data>
-  <data name="Completed" xml:space="preserve">
-    <value>The order has arrived.</value>
-  </data>
-  <data name="NoOrder" xml:space="preserve">
-    <value>No previously completed orders.</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>My Orders</value>
+  <data name="SiparisMesaj2" xml:space="preserve">
+    <value>Your order has been received. Your order number:</value>
   </data>
 </root>

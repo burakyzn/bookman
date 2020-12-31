@@ -147,6 +147,21 @@
   <data name="Yazar" xml:space="preserve">
     <value>Author</value>
   </data>
+  <data name="{0} Alanı Boş Bırakılamaz." xml:space="preserve">
+    <value>{0} field cannot be left blank.</value>
+  </data>
+  <data name="{0} En Az 1 olmalıdır." xml:space="preserve">
+    <value>{0} must be at least 1.</value>
+  </data>
+  <data name="{0} En Az 1 ve 9999 arasında olmalıdır." xml:space="preserve">
+    <value>{0} Must be at least between 1 and 9999.</value>
+  </data>
+  <data name="{0} En Az {2} En Fazla {1} Karakter Uzunluğunda Olmalıdır." xml:space="preserve">
+    <value>{0} must be at least {2} at most {1} characters long.</value>
+  </data>
+  <data name="{0}'ı 4 Haneli Olmalıdır." xml:space="preserve">
+    <value>{0} must be 4 digits.</value>
+  </data>
   <data name="Üçüncü Fotograf" xml:space="preserve">
     <value>Third Photo</value>
   </data>

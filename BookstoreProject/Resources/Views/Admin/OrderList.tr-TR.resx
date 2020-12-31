@@ -120,6 +120,12 @@
   <data name="Cargo" xml:space="preserve">
     <value>Kargola</value>
   </data>
+  <data name="cargo1" xml:space="preserve">
+    <value>Kargolanmak için bekliyor.</value>
+  </data>
+  <data name="completed" xml:space="preserve">
+    <value>Sipariş kullanıcıya ulaştı.</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Detaylar</value>
   </data>

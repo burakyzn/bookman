@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace BookstoreProject.Controllers
 {
@@ -16,11 +17,12 @@ namespace BookstoreProject.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<UserDetails> _userManager;
-
-        public BasketsController(ApplicationDbContext context, UserManager<UserDetails> userManager)
+        private readonly IStringLocalizer<BasketsController> _localizer;
+        public BasketsController(ApplicationDbContext context, UserManager<UserDetails> userManager, IStringLocalizer<BasketsController> localizer)
         {
             _context = context;
             _userManager = userManager;
+            _localizer = localizer;
         }
 
 
@@ -118,7 +120,7 @@ namespace BookstoreProject.Controllers
                             _context.Update(tmpBook);
                         }
 
-                        TempData["SiparisMesaj"] = "Siparişiniz alınamadı. Stoktan düşmüş kitap içeriyor : "
+                        TempData["SiparisMesaj"] = _localizer["SiparisMesaj1"]
                             + _book.Name;
                         return RedirectToAction("Index", "Baskets");
                     }
@@ -133,7 +135,8 @@ namespace BookstoreProject.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            TempData["SiparisMesaj"] = "Siparişiniz alındı. Sipariş numaranız : " + basketId;
+            TempData["SiparisMesaj"] = _localizer.GetString("SiparisMesaj2") + basketId;
+            //_localizer["SiparisMesaj2"] + " " + basketId;
             return RedirectToAction("Index", "Baskets");
         }
     }

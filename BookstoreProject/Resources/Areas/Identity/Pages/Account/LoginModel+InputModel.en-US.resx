@@ -117,13 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Edit" xml:space="preserve">
-    <value>Düzenle</value>
-  </data>
-  <data name="GoBackToList" xml:space="preserve">
-    <value>Listeye Geri Dön</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Dil Detayları</value>
+  <data name="Şifre" xml:space="preserve">
+    <value>Password</value>
   </data>
 </root>

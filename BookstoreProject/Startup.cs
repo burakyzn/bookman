@@ -53,9 +53,11 @@ namespace BookstoreProject
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequiredLength = 5;
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
             });
 
             services.ConfigureApplicationCookie(options =>

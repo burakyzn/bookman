@@ -60,14 +60,14 @@ namespace BookstoreProject.Areas.Identity.Pages.Account
             public string Soyad { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Şifre {0} ile {1} karakter arasında olmalıdır.", MinimumLength = 3)]
             [DataType(DataType.Password)]
             [Display(Name = "Şifre")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Tekrar Şifre")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Şifreler birbiriyle eşleşmiyor.")]
             public string ConfirmPassword { get; set; }
         }
 

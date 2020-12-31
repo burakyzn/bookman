@@ -7,7 +7,7 @@
 
 <section class="static about-sec">
     <div class="container-fluid">
-        <h1>@localizer["BookList"]</h1>
+        <h1>@localizer["Title"]</h1>
         <form asp-controller="Books" asp-action="Create" style=" margin-bottom: 10px;" method="get">
             <button type="submit" class="btn btn-primary">@localizer["AddBook"]</button>
         </form>
@@ -100,12 +100,11 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-
             var currentCulture = $('#currentCalture').text();
             if (currentCulture == "en-US") {
-                $('#orderDetailTable').DataTable();
+                $('#bookTable').DataTable();
             } else {
-                $('#orderDetailTable').DataTable({
+                $('#bookTable').DataTable({
                     language: TurkishLanguageRule
                 });
             }

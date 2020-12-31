@@ -120,9 +120,6 @@
   <data name="Add" xml:space="preserve">
     <value>Ekle</value>
   </data>
-  <data name="AddCategory" xml:space="preserve">
-    <value>Ekle</value>
-  </data>
   <data name="GoBackToList" xml:space="preserve">
     <value>Listeye Geri Dön</value>
   </data>

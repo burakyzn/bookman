@@ -1,17 +1,17 @@
 ﻿@page
 @model LoginModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = localizer["Title"].Value;
 }
-
-@*<h1>@ViewData["Title"]</h1>*@
 
 <section class="static about-sec">
     <div class="container">
-        <h1>Giriş Yap</h1>
-        <p>Giriş yaparak sepetine ulaşabilir ve en güzel kitapları hemen sipariş verebilirsin. </p>
+        <h1>@localizer["Title"]</h1>
+        <p>@localizer["Slogan"]</p>
         <div class="form">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <form id="account" method="post">
                 <div class="row">
                     <div class="col-md-5">
@@ -25,8 +25,8 @@
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                     <div class="col-lg-8 col-md-12">
-                        <button type="submit" class="btn btn-primary">Giriş Yap</button>
-                        <h5>Kayıtlı değil misin? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Kayıt Ol</a></h5>
+                        <button type="submit" class="btn btn-primary">@localizer["Title"]</button>
+                        <h5>@localizer["NoRegister"] <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@localizer["Register"]</a></h5>
                     </div>
                 </div>
             </form>

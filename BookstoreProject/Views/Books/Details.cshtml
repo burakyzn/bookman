@@ -5,11 +5,9 @@
     ViewData["Title"] = localizer["Title"].Value;
 }
 <div class="container">
-    <h1>@localizer["Details"]</h1>
+    <h1>@localizer["Title"]</h1>
     <hr />
     <div>
-
-        <hr />
         <dl class="row">
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Name)
@@ -84,19 +82,19 @@
                 @Html.DisplayNameFor(model => model.MainPhoto)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.MainPhoto)
+                <img style="max-width:100px;" src="~/images/@Model.MainPhoto" class="img" />
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.SecondPhoto)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.SecondPhoto)
+                <img style="max-width:100px;" src="~/images/@Model.SecondPhoto" class="img" />
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ThirdPhoto)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ThirdPhoto)
+                <img style="max-width:100px;" src="~/images/@Model.ThirdPhoto" class="img" />
             </dd>
         </dl>
     </div>

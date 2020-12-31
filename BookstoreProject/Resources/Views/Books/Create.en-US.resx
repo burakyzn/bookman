@@ -120,9 +120,6 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="AddBook" xml:space="preserve">
-    <value> Add A Book</value>
-  </data>
   <data name="GoBackToList" xml:space="preserve">
     <value>Go Back To List</value>
   </data>

@@ -7,7 +7,7 @@
 
 <section class="static about-sec">
     <div class="container">
-        <h1>@localizer["CategoryList"]</h1>
+        <h1>@localizer["Title"]</h1>
         <form asp-controller="Categories" asp-action="Create" style=" margin-bottom: 10px;" method="get">
             <button type="submit" class="btn btn-primary">@localizer["AddCategory"]</button>
         </form>
@@ -59,12 +59,11 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-
             var currentCulture = $('#currentCalture').text();
             if (currentCulture == "en-US") {
-                $('#orderDetailTable').DataTable();
+                $('#categoriesTable').DataTable();
             } else {
-                $('#orderDetailTable').DataTable({
+                $('#categoriesTable').DataTable({
                     language: TurkishLanguageRule
                 });
             }

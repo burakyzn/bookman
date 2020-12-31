@@ -4,7 +4,7 @@
 @{ var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
                 var cultureList = LocOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = x.Name }).ToList(); }
 <div>
-    <form id="cultureForm"> @*asp-controller="Home" asp-action="LangSetting"*@
+    <form id="cultureForm">
         <select id="culture" name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList" onchange="changeLang()">
         </select>
     </form>

@@ -10,7 +10,7 @@ namespace BookstoreProject.Models
     {
         public int Id { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z_ğüşıöçĞÜŞİÖÇ]+$", ErrorMessage = "Sadece Harf Giriniz.")]
+        [RegularExpression(@"^[a-zA-Z_ğüşıöçĞÜŞİÖÇ ]+$", ErrorMessage = "Sadece Harf Giriniz.")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} En Az {2} En Fazla {1} Karakter Uzunluğunda Olmalıdır.")]
         [Required(ErrorMessage = "Bu Alan Boş Bırakılamaz")]
         [Display(Name = "İsim")]

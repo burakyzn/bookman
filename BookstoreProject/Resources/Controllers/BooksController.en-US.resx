@@ -120,4 +120,7 @@
   <data name="ErrorMessage1" xml:space="preserve">
     <value>A book cannot be created without adding a photo.</value>
   </data>
+  <data name="ErrorMessage2" xml:space="preserve">
+    <value>Photos can only be JPG and PNG.</value>
+  </data>
 </root>

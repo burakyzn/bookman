@@ -120,4 +120,7 @@
   <data name="ErrorMessage1" xml:space="preserve">
     <value>Fotoğraf eklemeden kitap yaratılamaz.</value>
   </data>
+  <data name="ErrorMessage2" xml:space="preserve">
+    <value>Fotoğraflar sadece JPG ve PNG formatında olabilir.</value>
+  </data>
 </root>

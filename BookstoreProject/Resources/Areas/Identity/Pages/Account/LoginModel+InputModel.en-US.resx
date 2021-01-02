@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Beni Hatırla?" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Lütfen geçerli bir e-posta adresi girin" xml:space="preserve">
+    <value>Please enter a valid email address</value>
+  </data>
+  <data name="{0} boş bırakılamaz." xml:space="preserve">
+    <value>{0} cannot be left blank.</value>
+  </data>
   <data name="Şifre" xml:space="preserve">
     <value>Password</value>
   </data>

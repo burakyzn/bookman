@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace BookstoreProject.Areas.Identity.Pages.Account
 {
@@ -46,20 +47,20 @@ namespace BookstoreProject.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "{0} boş bırakılamaz.")]
+            [EmailAddress(ErrorMessage = "Lütfen geçerli bir e-posta adresi girin")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} boş bırakılamaz.")]
             [Display(Name = "Ad")]
             public string Ad { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} boş bırakılamaz.")]
             [Display(Name = "Soyad")]
             public string Soyad { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} boş bırakılamaz.")]
             [StringLength(100, ErrorMessage = "Şifre {0} ile {1} karakter arasında olmalıdır.", MinimumLength = 3)]
             [DataType(DataType.Password)]
             [Display(Name = "Şifre")]

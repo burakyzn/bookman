@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace BookstoreProject.Areas.Identity.Pages.Account
 {
@@ -21,14 +22,15 @@ namespace BookstoreProject.Areas.Identity.Pages.Account
         private readonly UserManager<UserDetails> _userManager;
         private readonly SignInManager<UserDetails> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
+        private readonly IStringLocalizer<LoginModel> _localizer;
         public LoginModel(SignInManager<UserDetails> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<UserDetails> userManager)
+            UserManager<UserDetails> userManager, IStringLocalizer<LoginModel> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _localizer = localizer;
         }
 
         [BindProperty]
@@ -43,11 +45,12 @@ namespace BookstoreProject.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "{0} boş bırakılamaz.")]
+            [Display(Name = "Email")]
+            [EmailAddress(ErrorMessage = "Lütfen geçerli bir e-posta adresi girin")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} boş bırakılamaz.")]
             [DataType(DataType.Password)]
             [Display(Name = "Şifre")]
             public string Password { get; set; }
@@ -98,7 +101,7 @@ namespace BookstoreProject.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Kullanıcı adı veya şifre yanlış.");
+                    ModelState.AddModelError(string.Empty, _localizer["Incorrect"]);//"Kullanıcı adı veya şifre yanlış."
                     return Page();
                 }
             }

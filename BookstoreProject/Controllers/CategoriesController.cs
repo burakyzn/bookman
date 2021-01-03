@@ -30,7 +30,6 @@ namespace BookstoreProject.Controllers
         /*
          * Kategori listesini veritabanindan ceker ve geri dondurur.
          */
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Categories.ToListAsync());
@@ -41,7 +40,6 @@ namespace BookstoreProject.Controllers
         /*
          * Details fonksiyonu verilen kategori idsine gore kategoriyi bulur ve geri dondurur
          */
-        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -62,7 +60,7 @@ namespace BookstoreProject.Controllers
 
         #region Create GET
         /*
-         * Create fonksiyonu kitap olusturmak icin cagrildiginda Create.cshtml viewini dondurur.
+         * Create fonksiyonu kategori olusturmak icin cagrildiginda Create.cshtml viewini dondurur.
          */
         [HttpGet]
         public IActionResult Create()

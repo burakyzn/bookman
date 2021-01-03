@@ -41,7 +41,6 @@ namespace BookstoreProject.Controllers
          * Bu fonksiyon varolan siparislerin listesini kullanicilarla birlestirerek dondurur.
          * Burada siparisleri, sepetin durumunun KARGO ve aktifliginin false olmasindan anliyoruz.
          */
-        [HttpGet]
         public async Task<IActionResult> OrderList()
         {
             List<Basket> basket = await _context.Baskets

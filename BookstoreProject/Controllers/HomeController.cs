@@ -226,7 +226,7 @@ namespace BookstoreProject.Controllers
         }
         #endregion
 
-        #region ErrorPage
+        #region ErrorPage with statusCode
         /*
          * ErrorPage fonksiyonu gelen statusCode una gore hata mesaji doldurup sayfayi geri dondurur
          */
@@ -242,6 +242,17 @@ namespace BookstoreProject.Controllers
                     ViewBag.ErrorMessage = _localizer["ErrorMessage2"];
                     break;
             }
+            return View();
+        }
+        #endregion
+
+        #region ErrorPage with ReturnUrl
+        /*
+         * Bu fonksiyon accessdenied hatasinda dondurulur gitmek istedigi sayfa bulunmadi hatasi doner.
+         */
+        public IActionResult ErrorPage(string ReturnUrl)
+        {
+            ViewBag.ErrorMessage = _localizer["ErrorMessage2"] + ": " + ReturnUrl;
             return View();
         }
         #endregion

@@ -120,7 +120,7 @@ namespace BookstoreProject.Controllers
          * Sepet aktifligi false yapilir ve durumu KARGO olarak ayarlanir.
          * Sepet numarasi kullaniciya siparis numarasi olarak geri dondurulur.
          */
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> BuyBooks(int? basketId)
         {
             Basket basket = await _context.Baskets

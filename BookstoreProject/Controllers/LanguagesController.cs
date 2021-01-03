@@ -33,7 +33,7 @@ namespace BookstoreProject.Controllers
         }
         #endregion
 
-        #region Detials
+        #region Details
         /*
          * Details fonksiyonu parametre olarak aldigi dil idsine gore dili veritabanından alir ve model olarak dondurur. 
          */

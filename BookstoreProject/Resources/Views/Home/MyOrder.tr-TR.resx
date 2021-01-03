@@ -126,6 +126,9 @@
   <data name="btnDetail" xml:space="preserve">
     <value>Detay</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Sipariş iptal edildi.</value>
+  </data>
   <data name="Cargo" xml:space="preserve">
     <value>Kargolanmak için bekliyor.</value>
   </data>

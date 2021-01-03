@@ -36,15 +36,7 @@
                             <span style="margin-right:10px;">@Html.DisplayFor(modelItem => item.UserDetails.Soyad)</span>
                         </td>
                         <td>
-                            @if(item.Status=="KARGO")
-                            {
-                                <span>@localizer["cargo1"]</span>
-                            }
-                            else
-                            {
-                                <span>@localizer["completed"]</span>
-                            }
-                            @Html.DisplayFor(modelItem => item.Status)
+                            <span>@localizer["StatusMessage"]</span>
                         </td>
                         <td style="display:flex;">
                             <a style="padding: 5px;width: 50%;" asp-action="ChangeSituation" asp-route-id="@item.Id"><input type="submit" value="@localizer["Cargo"]" class="btn btn-block btn-primary" /></a>

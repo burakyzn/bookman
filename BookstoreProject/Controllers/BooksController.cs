@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -14,26 +13,40 @@ using Microsoft.Extensions.Localization;
 
 namespace BookstoreProject.Controllers
 {
+    // Sadece Admin rolu tanimli olan kullanicilarin bu controllerda islem yapabilmesi icin eklenmistir.
     [Authorize(Roles = "Admin")]
     public class BooksController : Controller
     {
+        #region Properties
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnviroment;
         private readonly IStringLocalizer<BooksController> _localizer;
+        #endregion
+
+        #region Constructor
         public BooksController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, IStringLocalizer<BooksController> localizer)
         {
             _context = context;
             _hostEnviroment = hostEnvironment;
             _localizer = localizer;
         }
+        #endregion
 
-
+        #region Index
+        /*
+         * Admin panelindeki kitaplar listesi sayfasi icin tum kitaplari dil,yazar ve kategorileriyle eslestirerek dondurur.
+         */
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Books.Include(b => b.Author).Include(b => b.Category).Include(b => b.Language);
             return View(await applicationDbContext.ToListAsync());
         }
+        #endregion
 
+        #region Details
+        /*
+         * Details fonksiyonu parametre olarak alinan kitabi yazar, kategori ve dil bilgisiyle eslestirip dondurur.
+         */
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,7 +66,13 @@ namespace BookstoreProject.Controllers
 
             return View(book);
         }
+        #endregion
 
+        #region Create GET
+        /*
+         * Create fonksiyonu cagrildiginda aktif yazar, kategori ve dil listelerini cekip viewa dondurur.
+         */
+        [HttpGet]
         public IActionResult Create()
         {
             ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a => a.Active == true), "Id", "Name");
@@ -61,14 +80,21 @@ namespace BookstoreProject.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name");
             return View();
         }
+        #endregion
 
+        #region Create POST
+        /*
+         * Create fonksiyonu disaridan alinan kitap modelini veritabanina ekler.
+         * Alinan uc tane kitap gorselini proje altina images klasorune kaydeder.
+         * Bu images klasoru altindaki gorsellerin dosya isimlerini veritabaninda tutar.
+         */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Book book)
         {
             if (ModelState.IsValid)
             {
-                if(book.MainPhotoFile == null || book.SecondPhotoFile == null || book.ThirdPhotoFile == null)
+                if (book.MainPhotoFile == null || book.SecondPhotoFile == null || book.ThirdPhotoFile == null)
                 {
                     ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
                     ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
@@ -132,7 +158,14 @@ namespace BookstoreProject.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
             return View(book);
         }
+        #endregion
 
+        #region Edit GET
+        /*
+         * Edit fonksiyonu parametre olarak gonderilen kitap idsine gore kitabi veritabanindan bulur.
+         * Yazar, kategori ve dil listelerini çekerek geri dondurur.
+         */
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -145,14 +178,19 @@ namespace BookstoreProject.Controllers
             {
                 return NotFound();
             }
-            
-            //List<SelectList> degerler = _context.Authors.Where(a => a.Active == true).ToList();
-            ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a=>a.Active==true), "Id", "Name", book.AuthorId);
+
+            ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a => a.Active == true), "Id", "Name", book.AuthorId);
             ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name", book.CategoryId);
             ViewData["LanguageId"] = new SelectList(_context.Languages.Where(a => a.Active == true), "Id", "Name", book.LanguageId);
             return View(book);
         }
+        #endregion
 
+        #region Edit POST
+        /*
+         * Edit fonksiyonu disaridan alinan kitap modeline gore veritabaninda olan kitabi gunceller.
+         * Kitap icin alinan gorsellerden degistirilmis olanlari gunceller degistirilmemis olanlar ayni kalir.
+         */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Book book)
@@ -174,7 +212,7 @@ namespace BookstoreProject.Controllers
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        if(imgext[i] != String.Empty)
+                        if (imgext[i] != String.Empty)
                         {
                             string path_name = Guid.NewGuid().ToString() + imgext[i];
                             string saveimg = Path.Combine(_hostEnviroment.WebRootPath, "images", path_name);
@@ -205,9 +243,10 @@ namespace BookstoreProject.Controllers
                                 default:
                                     break;
                             }
-                        } 
-                    } 
-                } else
+                        }
+                    }
+                }
+                else
                 {
                     ViewData["AuthorId"] = new SelectList(_context.Authors.Where(a => a.Active == true), "Id", "Name", book.AuthorId);
                     ViewData["CategoryId"] = new SelectList(_context.Categories.Where(a => a.Active == true), "Id", "Name", book.CategoryId);
@@ -240,7 +279,13 @@ namespace BookstoreProject.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", book.LanguageId);
             return View(book);
         }
+        #endregion
 
+        #region Delete GET
+        /*
+         * Delete fonksiyonu alinan kitap idsine gore kitabi yazar, kategori ve dil bilgileriyle eslestirip geri dondurur.
+         */
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -260,8 +305,12 @@ namespace BookstoreProject.Controllers
 
             return View(book);
         }
+        #endregion
 
-
+        #region Delete POST
+        /*
+         * DeleteConfirmed fonksiyonu alinan kitap idsine gore kitabin aktiflik durumunu aktifse pasif pasifse aktif yapar.
+         */
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -270,19 +319,9 @@ namespace BookstoreProject.Controllers
 
             if (book != null)
             {
-                if(book.Active==true)
-                {
-                    book.Active = false;
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
-                }
-                else
-                {
-                    book.Active = true;
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
-                }
-                
+                book.Active = !book.Active;
+                _context.Update(book);
+                await _context.SaveChangesAsync();
             }
             else
             {
@@ -290,14 +329,18 @@ namespace BookstoreProject.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-
-
-
         }
+        #endregion
 
+        #region BookExists
+        /*
+         * Kitabin varligini yoklayan fonksiyondur.
+         */
         private bool BookExists(int id)
         {
             return _context.Books.Any(e => e.Id == id);
         }
+        #endregion
+
     }
 }

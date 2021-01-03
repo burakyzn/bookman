@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,27 +12,39 @@ using Microsoft.Extensions.Localization;
 
 namespace BookstoreProject.Controllers
 {
+    // Sadece giris yapmis kullanicilarin bu controller uzerinden fonksiyon cagirabilmesi icin eklenmistir.
+    [Authorize]
     public class BasketsController : Controller
     {
+        #region Properties
         private readonly ApplicationDbContext _context;
         private readonly UserManager<UserDetails> _userManager;
         private readonly IStringLocalizer<BasketsController> _localizer;
+        #endregion
+
+        #region Constructor
         public BasketsController(ApplicationDbContext context, UserManager<UserDetails> userManager, IStringLocalizer<BasketsController> localizer)
         {
             _context = context;
             _userManager = userManager;
             _localizer = localizer;
         }
+        #endregion
 
-
-        [Authorize]
+        #region Index
+        /*
+         * Bu fonksiyon kullaniciya ait sepeti dondurur. 
+         * Eger kullaniciya ait bir sepet daha once olusmamissa olusturur ve dondurur.
+         * Eger kullaniciya ait sepet daha once olusmus ve icerisinde eklenmis kitap varsa kitaplarin listesini
+         * ve toplam fiyati dondurur.
+         */
         public async Task<IActionResult> Index()
         {
             Basket basket = _context.Baskets
                 .Where(x => x.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
                 .FirstOrDefault();
 
-            if(basket == null)
+            if (basket == null)
             {
                 Basket newBasket = new Basket
                 {
@@ -44,7 +55,8 @@ namespace BookstoreProject.Controllers
 
                 _context.Add(newBasket);
                 _context.SaveChanges();
-            } else
+            }
+            else
             {
                 List<BasketItem> basketItems = await _context.BasketItems
                         .Include(x => x.Basket)
@@ -61,8 +73,14 @@ namespace BookstoreProject.Controllers
 
             return View();
         }
+        #endregion
 
-        [Authorize]
+        #region RemoveFromBasket
+        /*
+         * Bu fonksiyon disaridan alinan kitap idsine gore kullanicinin o anda sepetinde bulunan kitabi sepetinden 
+         * cikarmak icin sepette bulunan kitabin durumunu false yapar.
+         */
+        [HttpGet]
         public async Task<IActionResult> RemoveFromBasket(int? bookId)
         {
             if (bookId == null)
@@ -74,46 +92,55 @@ namespace BookstoreProject.Controllers
                 .Where(x => x.UserDetailsId == User.FindFirstValue(ClaimTypes.NameIdentifier) && x.Active == true)
                 .FirstOrDefault();
 
-            if(basket != null)
+            if (basket != null)
             {
                 BasketItem basketItem = _context.BasketItems
                     .Where(x => x.BasketId == basket.Id && x.Active == true && x.BookId == bookId).FirstOrDefault();
 
-                if(basketItem != null)
+                if (basketItem != null)
                 {
                     basketItem.Active = false;
                     _context.Update(basketItem);
                     await _context.SaveChangesAsync();
                 }
-            } else
+            }
+            else
             {
                 return NotFound();
             }
 
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
-        [Authorize]
+        #region BuyBooks
+        /*
+         * Kullanici siparisi tamamladiginda bu fonksiyon cagrilir.
+         * Kullanicinin sepetindeki urunlerin stoklari dusurulur.
+         * Sepet aktifligi false yapilir ve durumu KARGO olarak ayarlanir.
+         * Sepet numarasi kullaniciya siparis numarasi olarak geri dondurulur.
+         */
+        [HttpGet]
         public async Task<IActionResult> BuyBooks(int? basketId)
         {
             Basket basket = await _context.Baskets
                 .Where(x => x.Id == basketId)
                 .FirstOrDefaultAsync();
 
-            if(basket != null)
+            if (basket != null)
             {
                 List<BasketItem> basketItem = await _context.BasketItems
                     .Include(x => x.Book)
                     .Where(x => x.BasketId == basketId && x.Active == true)
                     .ToListAsync();
 
-                for(int i = 0; i < basketItem.Count; i++)
+                for (int i = 0; i < basketItem.Count; i++)
                 {
                     Book _book = basketItem[i].Book;
 
-                    if(_book.Stock == 0)
+                    if (_book.Stock == 0)
                     {
-                        for(int j = 0; j < i; j++)
+                        for (int j = 0; j < i; j++)
                         {
                             Book tmpBook = basketItem[i].Book;
                             tmpBook.Stock++;
@@ -136,8 +163,8 @@ namespace BookstoreProject.Controllers
             }
 
             TempData["SiparisMesaj"] = _localizer.GetString("SiparisMesaj2") + basketId;
-            //_localizer["SiparisMesaj2"] + " " + basketId;
             return RedirectToAction("Index", "Baskets");
         }
+        #endregion
     }
 }

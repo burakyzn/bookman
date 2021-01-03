@@ -120,6 +120,9 @@
   <data name="AddBasket" xml:space="preserve">
     <value>Sepete Ekle</value>
   </data>
+  <data name="AuthWarning" xml:space="preserve">
+    <value>Sepete eklemek için giriş yapmalısınız.</value>
+  </data>
   <data name="Currency" xml:space="preserve">
     <value>₺</value>
   </data>

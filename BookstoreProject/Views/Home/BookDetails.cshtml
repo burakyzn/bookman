@@ -66,11 +66,20 @@
                 </ul>
                 @if (book1.Stock != 0)
                 {
-                    <form asp-controller="Home" asp-action="AddBookToBasket" method="post">
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <form asp-controller="Home" asp-action="AddBookToBasket" method="post">
+                            <div class="btn-sec">
+                                <button name="bookId" value="@book1.Id" class="btn black">@localizer["AddBasket"]</button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
                         <div class="btn-sec">
-                            <button name="bookId" value="@book1.Id" class="btn black">@localizer["AddBasket"]</button>
+                            @localizer["AuthWarning"]
                         </div>
-                    </form>
+                    }
                 }
                 else
                 {

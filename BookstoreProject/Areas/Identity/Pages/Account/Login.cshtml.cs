@@ -101,7 +101,7 @@ namespace BookstoreProject.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, _localizer["Incorrect"]);//"Kullanıcı adı veya şifre yanlış."
+                    ModelState.AddModelError(string.Empty, _localizer["Incorrect"]);
                     return Page();
                 }
             }

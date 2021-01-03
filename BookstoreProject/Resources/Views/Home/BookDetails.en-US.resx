@@ -120,6 +120,9 @@
   <data name="AddBasket" xml:space="preserve">
     <value>Add To Basket</value>
   </data>
+  <data name="AuthWarning" xml:space="preserve">
+    <value>You have to login first for adding book to basket.</value>
+  </data>
   <data name="Currency" xml:space="preserve">
     <value>$</value>
   </data>

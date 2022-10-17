@@ -1,6 +1,6 @@
-# ✏️ BookStore E-commerce Application
+# 🚀 Bookman
 
-This e-commerce web application was designed as  a project for web programming lecture. Administrators have a panel where they can manage everything related to the books. Also, users register on the website and can search for books, monitor the status of their orders, and order the books they like by adding them to their baskets. Ordered books wait to be shipped from the admin panel. The development of the project was done using .NET Core, EntityFramework as an ORM tool, HTML/CSS, JavaScript and jQuery.
+Bookman is an example of a book selling application.
 
 ## ⚙️ Install
 

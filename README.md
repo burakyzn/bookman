@@ -6,7 +6,7 @@ Bookman is an example of a book selling application.
 
 Clone the project to your computer.
 ```
-git clone https://github.com/burakyzn/bookstore-net-core.git
+git clone https://github.com/burakyzn/bookman.git
 ```
 
 Open the project folder and run the entity framework update command in the CLI.
